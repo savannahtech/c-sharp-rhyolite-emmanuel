@@ -1,0 +1,479 @@
+﻿@{
+    ViewBag.Title = "Lease Property Unit";
+    Layout = "~/Views/Shared/Layout/_adminRentalLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Rentals </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("LeasePropertyUnit","Rentals")"> Lease Property Unit </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Lease Property Unit </h6>
+            <div class="element-box">
+                <div class="table-responsive" style=" overflow-y:scroll;overflow-x:hidden">
+                   
+                    <fieldset class="form-group">
+                        <legend><span> Lease/Rent Details </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-2"> </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <strong> Property: </strong> </label>
+
+                                    <input id="propertyId" v-model="propertyId" type="text" class="form-control" />
+
+                                    <span class="text-danger" v-if="!$v.propertyId.required && $v.propertyId.$dirty && propertyId == ''"> Property field is required </span>
+
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label> <strong> Start Date: </strong>  </label>
+
+                                    <input id="startDate" v-model="startDate" ref="startDate" type="text" class="form-control" />
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Rent Cycle : </strong> </label>
+                                    <select class="form-control mb-3" v-model="rentCycle" ref="rentCycle">
+                                        <option value=""> Select Rent Cycle </option>
+                                        <option> Daily </option>
+                                        <option> Weekly </option>
+                                        <option> Every two weeks </option>
+                                        <option> Monthly </option>
+                                        <option> Every two months </option>
+                                        <option> Quaterly </option>
+                                        <option> Every six months </option>
+                                        <option> Yearly </option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Memo </strong>  </label>
+                                    <input type="text" class="form-control" v-model="memo" placeholder="If left bank, will show as Rent">
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label> <strong> Ledger Account : </strong>  </label>
+
+                                    <select class="form-control mb-3" v-model="ledgerAccountId" ref="ledgerAccountId">
+                                        <option value=""> Select Ledger Account </option>
+                                        <option :value="ledgerAccount.id" v-for="ledgerAccount in ledgerAccountList"> {{ ledgerAccount.accountName }} </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+
+                                    <label> <strong> Property Unit: </strong> </label>
+                                    <input id="propertyUnitId" v-show="propertyUnitList.length > 0 && isPropertyUnitControlRendered" v-model="propertyId" type="text" class="form-control" />
+
+                                    <select class="form-control mb-3" v-if="propertyUnitList.length == 0 && !isPropertyUnitControlRendered">
+                                        <option> Select Unit </option>
+                                    </select>
+
+                                    <span class="text-danger" v-if="!$v.propertyUnitId.required && $v.propertyUnitId.$dirty && propertyUnitId == ''"> Property Unit field is required </span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <strong> End Date: </strong>  </label>
+
+                                    <input id="endDate" v-model="endDate" ref="endDate" type="text" class="form-control" />
+
+                                </div>
+
+                                 <div class="form-group">
+
+                                    <label> <strong> Lease Type : </strong> </label>
+                                    <select class="form-control mb-3" v-model="leaseType" ref="leaseType">
+                                        <option value=""> Select Lease Type </option>
+                                        <option value="fixed"> Fixed </option>
+                                        <option value="fixed-rollover"> Fixed w/rollover </option>
+                                        <option value="monthly"> At-will (month-to-month) </option>
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> <strong> Total Amount: </strong>  </label>
+                                    <input type="number" class="form-control" v-model="totalAmount" ref="totalAmount" placeholder="Amount">
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> <strong> Files: </strong>  </label>
+                                    <input type="file" name="customFile" multiple v-on:change="onFileUpload($event)" class="form-control">
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <legend><span> Rent Charge </span></legend>
+
+
+                        <div v-for="(rentCharge, index) in rentChargeList" :key="index">
+
+                            <div class="row">
+
+                                <div class="col-sm-2"> </div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+
+                                        <label> <strong> Amount: </strong>  </label>
+                                        <input type="number" v-model="rentCharge.amount" class="form-control" placeholder="0">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label> <strong> Ledger Account : </strong>  </label>
+
+                                        <select class="form-control mb-3" v-model="rentCharge.rentAccountId">
+                                            <option value=""> Select Ledger Account </option>
+                                            <option :value="ledgerAccount.id" v-for="ledgerAccount in ledgerAccountList"> {{ ledgerAccount.accountName }} </option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+
+                                        <label> <strong> Next Due Date: </strong>  </label>
+                                        <input type="date" v-model="rentCharge.nextDueDate" class="form-control" placeholder="0">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label> <strong> Memo </strong>  </label>
+                                        <input type="text" v-model="rentCharge.memo" class="form-control" placeholder="If left bank, will show as Rent">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-1 mt-3">
+
+                                    <div class="form-group mt-3">
+
+                                        <i class="os-icon os-icon-cancel-circle" @@click.prevent="removeRentCharge(index)"></i>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <hr v-if="rentChargeList.length > 1" />
+                        </div>
+
+                       
+
+                        <div class="row">
+
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+
+                                <a href="#" role="button" @@click.prevent="addRentCharge()" class="display--inline-block margin-bottom--std"><span class="icon--18 icon-add icon--v-middle" aria-hidden="true"></span> <span bd-i18n="Rentals.RentRoll.AddLeaseForm.Button.AddTenantCosigner" > Split Rent Charge </span></a>
+
+                            </div>
+                            <div class="col-sm-4"></div>
+
+                        </div>
+
+                    </fieldset>
+
+                     <fieldset class="form-group">
+                        <legend><span> Tenants &amp; Cosigners </span></legend>
+
+                        <div v-for="(tenantOrCosigner, index) in tenantOrCosignersList" :key="index">
+
+                            <div class="row">
+
+                            <div class="col-sm-2"> </div>
+
+                            <div class="col-sm-3">
+                                 
+                               <div class="form-group">
+
+                                    <label> <strong> First Name: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.firstName" class="form-control" placeholder="First Name">
+
+                               </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Last Name: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.lastName" class="form-control" placeholder="Last Name">
+
+                                </div>
+
+                                 <div class="form-group">
+
+                                    <label> <strong> Date Of Birth: </strong>  </label>
+                                    <input type="date" v-model="tenantOrCosigner.dateOfBirth" class="form-control" placeholder="">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Emergency Contact Phone No: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.emergencyContactPhoneNo" class="form-control" placeholder="Emergency Contact Phone No">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="checkbox checkbox-secondary mt-3">
+                                        <input type="checkbox" v-model="tenantOrCosigner.isCoSigner"> <span> Is Cosigner </span> <span class="checkmark"></span>
+                                     </label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3">
+
+                                  <div class="form-group">
+
+                                    <label> <strong> Primary Phone No: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.primaryPhoneNo" class="form-control" placeholder="Primary Phone No">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Secondary Phone No: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.secondaryPhoneNo" class="form-control" placeholder="Secondary Phone No">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Tax Identification No: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.taxIdentificationNo" class="form-control" placeholder="Tax Identification No">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Emergency Contact Email: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.emergencyContactEmail" class="form-control" placeholder="Emergency Contact Email">
+
+                                </div>
+
+                                <div v-if="tenantOrCosigner.isCoSigner">
+
+                                    <div class="form-group">
+
+                                        <label> <strong>  Country: </strong>  </label>
+
+                                        <select class="form-control mb-3" v-model="tenantOrCosigner.countryId">
+                                            <option value=""> Select Country </option>
+                                            <option :value="country.id" v-for="country in countryList"> {{country.name}} </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label> <strong> City: </strong>  </label>
+                                        <input type="text" v-model="tenantOrCosigner.city" class="form-control" placeholder="City">
+
+                                    </div>
+
+
+                                </div>
+
+                                 
+                            </div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+
+                                    <label> <strong> Primary Email: </strong>  </label>
+                                    <input type="email" v-model="tenantOrCosigner.primaryEmail" class="form-control" placeholder="Primary Email">
+
+                                </div>
+
+                                 
+                                <div class="form-group">
+
+                                    <label> <strong> Secondary Email: </strong>  </label>
+                                    <input type="email" v-model="tenantOrCosigner.secondaryEmail" class="form-control" placeholder="Secondary Email">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Emergency Contact Name: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.emergencyContactName" class="form-control" placeholder="Emergency Contact Name">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Relationship w/ Tenant: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.emergencyContactRelationshipToTenant" class="form-control" placeholder="Emergency Contact Relationship To Tenant">
+
+                                </div>
+
+                                <div v-if="tenantOrCosigner.isCoSigner">
+
+                                    <div class="form-group">
+
+                                    <label> <strong> Region Or State: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.regionOrState" class="form-control" placeholder="Region Or State">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label> <strong> Address: </strong>  </label>
+                                    <input type="text" v-model="tenantOrCosigner.address" class="form-control" placeholder="Address">
+
+                                </div>
+
+                                </div>
+
+                                
+
+                            </div>
+
+                            <div class="col-sm-1 mt-3">
+
+                                 <div class="form-group mt-3">
+
+                                    <i class="os-icon os-icon-cancel-circle" @@click.prevent="removeTenantOrCoSigner(index)"></i>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                            <hr v-if="tenantOrCosignersList.length > 1" />
+                        </div>
+
+                         
+                       <div class="row">
+
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4">
+
+                                <a href="#" role="button" class="display--inline-block margin-bottom--std"><span class="icon--18 icon-add icon--v-middle" aria-hidden="true"></span> <span bd-i18n="Rentals.RentRoll.AddLeaseForm.Button.AddTenantCosigner" @@click.prevent="addTenantOrCoSigner()"> Add tenant or cosigner </span></a>
+
+                            </div>
+
+                           <div class="col-sm-4"></div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="form-group">
+
+                        <legend><span> Security deposit (optional) </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-2"> </div>
+
+
+                            <div class="col-sm-4"> 
+
+                                 <div class="form-group">
+
+                                    <label> <strong> Due Date: </strong>  </label>
+                                    <input type="text" id="securityDepositDueDate" v-model="securityDepositDueDate" class="form-control">
+
+                              </div>
+
+                            </div>
+
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+
+                                    <label> <strong> Amount: </strong>  </label>
+                                    <input type="number" v-model="securityDepositAmount" class="form-control" placeholder="0">
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </fieldset>
+                    <hr />
+
+                    <div class="row">
+
+                        <div class="col-sm-2"> </div>
+
+                        <div class="col-sm-4">
+                            <button type="button" v-on:click="resetForm()" class="btn btn-warning"> <i class="bx bx-reset"></i> Reset </button>
+                        </div>
+
+                        <div class="col-sm-4">
+
+                            <button type="button" v-on:click="leaseProperty()" :disabled="isLoading" class="btn btn-primary" style="float: right;">
+
+                                Save
+                                
+                                <div class="spinner-border" v-if="isLoading" role="status" aria-hidden="true" style="width: 20px; height: 20px"></div>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/property-rental/rentals/lease-property-unit.js" asp-append-version="true"></script>

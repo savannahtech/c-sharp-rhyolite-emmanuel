@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Lease Renewal";
+    Layout = "~/Views/Shared/Layout/_adminRentalLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Rentals </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("LeaseRenewal","Leasing")"> Lease Renewal </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Lease Renewal </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/property-rental/leasing/lease-renewal.js" asp-append-version="true"></script>

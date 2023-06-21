@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "System Numbers";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Shared Resource </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("SystemNumbers","PayrollSharedResource")"> System Numbers </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> System Numbers </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <div id="dataTable"></div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/shared/system-numbers.js" asp-append-version="true"></script>

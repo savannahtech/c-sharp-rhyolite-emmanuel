@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Reports | Payment Receipt";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Reports</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("PaymentReceipt","SchReports")"> Payment Receipt </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Payment Receipt </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <label> <strong> Academic Year: </strong>  </label>
+                                <select class="form-control mb-3" v-model="selectedAcademicYearId" v-on:change="getPayments()">
+                                    <option value="">Select Academic Year</option>
+                                    <option :value="academicYear.id" v-for="academicYear in academicYearList"> {{academicYear.name}} </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label>  <strong> Term: </strong>  </label>
+                                <select class="form-control mb-3" v-model="selectedTermId" v-on:change="getPayments()">
+                                    <option value="">Select Term </option>
+                                    <option :value="term.id" v-for="term in termList"> {{term.name}} </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <label> Class: </label>
+                                <select class="form-control mb-3" v-model="selectedClassId" v-on:change="getPayments()">
+                                    <option value="">Select Class</option>
+                                    <option :value="schClass.id" v-for="schClass in classList"> {{schClass.className}} </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+                                <label> <strong> Student: </strong>  </label>
+                                <select class="form-control mb-3" v-model="selectedStudentId" v-on:change="getPayments()">
+                                    <option value="">Select Student</option>
+                                    <option :value="student.id" v-for="student in studentList">{{student.firstName}} {{student.lastName}} ({{student.studentIdentifier}})</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+                    <div style="height:auto;width:auto;min-height:500px;" id="reportView">  </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/school-manager/reports/payment-receipt.js" asp-append-version="true"></script>

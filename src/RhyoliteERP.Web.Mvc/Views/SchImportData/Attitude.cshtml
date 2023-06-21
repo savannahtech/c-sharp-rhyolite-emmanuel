@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Import Data | Attitude";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Import Data</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Attitude","SchImportData")"> Attitude </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Attitude </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <form asp-controller="SchImportData" asp-action="UploadAttitudesData" enctype="multipart/form-data" method="post">
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label>  <strong>Academic Year: </strong>  </label>
+                                    <select class="form-control mb-3" name="academicYearId" v-model="academicYearId" ref="academicYearId" v-on:change="getResults()">
+                                        <option value="">Select Academic Year</option>
+                                        <option :value="academicYear.id" v-for="academicYear in academicYearList">{{academicYear.name}}</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label>  <strong> Term: </strong> </label>
+                                    <select class="form-control mb-3" name="termId" v-model="termId" v-on:change="getResults()">
+                                        <option value="">Select Term </option>
+                                        <option :value="term.id" v-for="term in termList"> {{term.name}} </option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label>  <strong> Class: </strong> </label>
+                                    <select class="form-control mb-3" name="classId" v-model="classId" v-on:change="getResultTypes()">
+                                        <option value="">Select Class</option>
+                                        <option :value="schClass.id" v-for="schClass in classList"> {{schClass.className}} </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong> Choose File: </strong>  <a style="color:#3498DB;" href="#" id="sampleDownloadLink" v-on:click="downloadFile()"> <b> Download Template </b></a> </label>
+                                    <input type="file" name="customFile" class="form-control" required>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-1">
+
+                                <div class="form-group">
+                                    <br />
+                                    <button type="submit" value="Upload" id="uploadBtn" :disabled="!enableUpload" class="alignright btn btn-primary mt-2"> Import </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <script>
+
+        $(function () {
+            swal("Data Successfully Imported..!", "", "success");
+        });
+
+    </script>
+
+
+}
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+
+<script src="~/js/school-manager/import-data/attitudes.js" asp-append-version="true"></script>

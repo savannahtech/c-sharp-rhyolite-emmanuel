@@ -1,0 +1,88 @@
+﻿@using RhyoliteERP.Web.Views.Shared.Components.RhyoliteUserArea
+@model RhyoliteUserAreaViewModel
+
+
+@*<div class="element-search autosuggest-search-activator">
+    <input placeholder="Start typing to search...">
+</div>
+
+<div class="messages-notifications os-dropdown-trigger os-dropdown-position-left">
+    <i class="os-icon os-icon-mail-14"></i>
+    <div class="new-messages-count">12</div>
+    <div class="os-dropdown light message-list">
+        <ul>
+            <li>
+                <a href="#">
+                    <div class="user-avatar-w"><img alt="" src="img/avatar1.jpg"></div>
+                    <div class="message-content">
+                        <h6 class="message-from">John Mayers</h6>
+                        <h6 class="message-title">Account Update</h6>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="user-avatar-w"><img alt="" src="img/avatar2.jpg"></div>
+                    <div class="message-content">
+                        <h6 class="message-from">Phil Jones</h6>
+                        <h6 class="message-title">Secutiry Updates</h6>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="user-avatar-w"><img alt="" src="img/avatar3.jpg"></div>
+                    <div class="message-content">
+                        <h6 class="message-from">Bekky Simpson</h6>
+                        <h6 class="message-title">Vacation Rentals</h6>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="user-avatar-w"><img alt="" src="img/avatar4.jpg"></div>
+                    <div class="message-content">
+                        <h6 class="message-from">Alice Priskon</h6>
+                        <h6 class="message-title">Payment Confirmation</h6>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+*@
+
+<div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-left">
+    <i class="os-icon os-icon-ui-46"></i>
+    <div class="os-dropdown">
+        <div class="icon-w"><i class="os-icon os-icon-ui-46"></i></div>
+        <ul>
+            <li><a href="@Url.Action("Subscription", "Manage")"><i class="os-icon os-icon-delivery-box-2"></i><span> Manage Subscription </span></a></li>
+            <li><a href="@Url.Action("Downloads", "Manage")"><i class="os-icon os-icon-download"></i><span> Report Downloads </span></a></li>
+            <li><a href="@Url.Action("Modules", "Manage")"><i class="os-icon os-icon-external-link"></i><span> Switch Modules </span></a></li>
+            <li><a href="@Url.Action("Billing", "Manage")"><i class="os-icon os-icon-tasks-checked"></i><span> Billing </span></a></li>
+            @*<li><a href="@Url.Action("CancelSubscription", "Manage")"><i class="os-icon os-icon-ui-15"></i><span> Cancel Subscription </span></a></li>*@
+        </ul>
+    </div>
+</div>
+<div class="logged-user-w">
+    <div class="logged-user-i">
+        <div class="avatar-w"><img alt="" src="https://res.cloudinary.com/rhyoliteprime/image/upload/v1533814738/images_6.png"></div>
+        <div class="logged-user-menu color-style-bright">
+            <div class="logged-user-avatar-info">
+                <div class="avatar-w"><img alt="" src="https://res.cloudinary.com/rhyoliteprime/image/upload/v1533814738/images_6.png"></div>
+                <div class="logged-user-info-w">
+                    <div class="logged-user-name"> Hello @Html.Raw(Model.GetShownLoginName())  </div>
+                    <div class="logged-user-role"> @Html.Raw(Model.GetShownRoleName()) </div>
+                </div>
+            </div>
+            <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
+            <ul>
+                <li><a href="@Url.Action("Profile", "Manage")"><i class="os-icon os-icon-user-male-circle2"></i><span> Profile Details </span></a></li>
+                <li><a href="@Url.Action("Users", "Manage")"><i class="os-icon os-icon-users"></i><span> Manage Users </span></a></li>
+                <li><a href="@Url.Action("UpdatePassword", "Manage")"><i class="os-icon os-icon-shield"></i><span> Change Password </span></a></li>
+                <li><a href="@Url.Action("Logout", "Account")"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

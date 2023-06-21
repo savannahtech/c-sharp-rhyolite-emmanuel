@@ -1,0 +1,236 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>RhyoliteERP.Web.Mvc</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>RhyoliteERP.Web.Mvc</PackageId>
+    <UserSecretsId>AbpCompanyName-RhyoliteERP-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1</UserSecretsId>
+    <RootNamespace>RhyoliteERP.Web</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Views\BillsAndPayments - Copy\**" />
+    <Compile Remove="Views\Manage - Copy\**" />
+    <Compile Remove="Views\Parents - Copy\**" />
+    <Compile Remove="Views\PayrollDataEntry - Copy\**" />
+    <Compile Remove="Views\PayrollEnquiries - Copy\**" />
+    <Compile Remove="Views\PayrollImportData - Copy\**" />
+    <Compile Remove="Views\PayrollSetups - Copy\**" />
+    <Compile Remove="Views\PayrollSharedResource - Copy\**" />
+    <Compile Remove="Views\ProcessPay - Copy\**" />
+    <Compile Remove="Views\SalaryIncrease - Copy\**" />
+    <Compile Remove="Views\SchEnquiries - Copy\**" />
+    <Compile Remove="Views\SchImportData - Copy\**" />
+    <Compile Remove="Views\SchReports - Copy\**" />
+    <Compile Remove="Views\SchSetups - Copy\**" />
+    <Compile Remove="Views\SchSharedResource - Copy\**" />
+    <Compile Remove="Views\Staff - Copy\**" />
+    <Compile Remove="Views\Students - Copy\**" />
+    <Content Remove="Views\BillsAndPayments - Copy\**" />
+    <Content Remove="Views\Manage - Copy\**" />
+    <Content Remove="Views\Parents - Copy\**" />
+    <Content Remove="Views\PayrollDataEntry - Copy\**" />
+    <Content Remove="Views\PayrollEnquiries - Copy\**" />
+    <Content Remove="Views\PayrollImportData - Copy\**" />
+    <Content Remove="Views\PayrollSetups - Copy\**" />
+    <Content Remove="Views\PayrollSharedResource - Copy\**" />
+    <Content Remove="Views\ProcessPay - Copy\**" />
+    <Content Remove="Views\SalaryIncrease - Copy\**" />
+    <Content Remove="Views\SchEnquiries - Copy\**" />
+    <Content Remove="Views\SchImportData - Copy\**" />
+    <Content Remove="Views\SchReports - Copy\**" />
+    <Content Remove="Views\SchSetups - Copy\**" />
+    <Content Remove="Views\SchSharedResource - Copy\**" />
+    <Content Remove="Views\Staff - Copy\**" />
+    <Content Remove="Views\Students - Copy\**" />
+    <EmbeddedResource Remove="Views\BillsAndPayments - Copy\**" />
+    <EmbeddedResource Remove="Views\Manage - Copy\**" />
+    <EmbeddedResource Remove="Views\Parents - Copy\**" />
+    <EmbeddedResource Remove="Views\PayrollDataEntry - Copy\**" />
+    <EmbeddedResource Remove="Views\PayrollEnquiries - Copy\**" />
+    <EmbeddedResource Remove="Views\PayrollImportData - Copy\**" />
+    <EmbeddedResource Remove="Views\PayrollSetups - Copy\**" />
+    <EmbeddedResource Remove="Views\PayrollSharedResource - Copy\**" />
+    <EmbeddedResource Remove="Views\ProcessPay - Copy\**" />
+    <EmbeddedResource Remove="Views\SalaryIncrease - Copy\**" />
+    <EmbeddedResource Remove="Views\SchEnquiries - Copy\**" />
+    <EmbeddedResource Remove="Views\SchImportData - Copy\**" />
+    <EmbeddedResource Remove="Views\SchReports - Copy\**" />
+    <EmbeddedResource Remove="Views\SchSetups - Copy\**" />
+    <EmbeddedResource Remove="Views\SchSharedResource - Copy\**" />
+    <EmbeddedResource Remove="Views\Staff - Copy\**" />
+    <EmbeddedResource Remove="Views\Students - Copy\**" />
+    <None Remove="Views\BillsAndPayments - Copy\**" />
+    <None Remove="Views\Manage - Copy\**" />
+    <None Remove="Views\Parents - Copy\**" />
+    <None Remove="Views\PayrollDataEntry - Copy\**" />
+    <None Remove="Views\PayrollEnquiries - Copy\**" />
+    <None Remove="Views\PayrollImportData - Copy\**" />
+    <None Remove="Views\PayrollSetups - Copy\**" />
+    <None Remove="Views\PayrollSharedResource - Copy\**" />
+    <None Remove="Views\ProcessPay - Copy\**" />
+    <None Remove="Views\SalaryIncrease - Copy\**" />
+    <None Remove="Views\SchEnquiries - Copy\**" />
+    <None Remove="Views\SchImportData - Copy\**" />
+    <None Remove="Views\SchReports - Copy\**" />
+    <None Remove="Views\SchSetups - Copy\**" />
+    <None Remove="Views\SchSharedResource - Copy\**" />
+    <None Remove="Views\Staff - Copy\**" />
+    <None Remove="Views\Students - Copy\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Manage\Profile.cshtml" />
+    <Content Remove="Views\Rentals\RecievePayments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\assets\admin\bower_components\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="wwwroot\assets\admin\bower_components\datatables.net-bs\css\dataTables.bootstrap.min.css" />
+    <Content Include="wwwroot\assets\admin\bower_components\dragula.js\dist\dragula.min.css" />
+    <Content Include="wwwroot\assets\admin\bower_components\dropzone\dist\dropzone.css" />
+    <Content Include="wwwroot\assets\admin\bower_components\fullcalendar\dist\fullcalendar.min.css" />
+    <Content Include="wwwroot\assets\admin\bower_components\ion.rangeSlider\css\ion.rangeSlider.css" />
+    <Content Include="wwwroot\assets\admin\bower_components\perfect-scrollbar\css\perfect-scrollbar.min.css" />
+    <Content Include="wwwroot\assets\admin\bower_components\select2\dist\css\select2.min.css" />
+    <Content Include="wwwroot\assets\admin\bower_components\slick-carousel\slick\slick.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Manage\Profile.cshtml" />
+    <None Include="Views\Rentals\RecievePayments.cshtml" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap-daterangepicker\daterangepicker.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap-validator\dist\validator.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\alert.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\button.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\carousel.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\collapse.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\dropdown.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\modal.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\popover.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\tab.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\tooltip.js" />
+    <None Include="wwwroot\assets\admin\bower_components\bootstrap\js\dist\util.js" />
+    <None Include="wwwroot\assets\admin\bower_components\chart.js\dist\Chart.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\ckeditor\ckeditor.js" />
+    <None Include="wwwroot\assets\admin\bower_components\datatables.net-bs\js\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\datatables.net\js\jquery.dataTables.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\dragula.js\dist\dragula.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\dropzone\dist\dropzone.js" />
+    <None Include="wwwroot\assets\admin\bower_components\editable-table\mindmup-editabletable.js" />
+    <None Include="wwwroot\assets\admin\bower_components\fullcalendar\dist\fullcalendar.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\ion.rangeSlider\js\ion.rangeSlider.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\jquery-bar-rating\dist\jquery.barrating.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\moment\moment.js" />
+    <None Include="wwwroot\assets\admin\bower_components\perfect-scrollbar\js\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\popper.js\dist\umd\popper.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\select2\dist\js\select2.full.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\slick-carousel\slick\slick.min.js" />
+    <None Include="wwwroot\assets\admin\bower_components\tether\dist\js\tether.min.js" />
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="wwwroot\**\*;Views\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RhyoliteERP.Web.Core\RhyoliteERP.Web.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.2" />
+    <PackageReference Include="Abp.HangFire" Version="7.3.0" />
+    <PackageReference Include="Abp.RedisCache" Version="7.3.0" />
+    <PackageReference Include="Abp.Castle.Log4Net" Version="7.3.0" />
+    <PackageReference Include="Syncfusion.XlsIO.Net.Core" Version="21.1.38" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\js\ap\" />
+    <Folder Include="wwwroot\js\ar\" />
+    <Folder Include="wwwroot\js\assets\" />
+    <Folder Include="wwwroot\js\gl\data-entry\" />
+    <Folder Include="wwwroot\js\property-rental\rental-ledger\" />
+    <Folder Include="wwwroot\js\stock\" />
+    <Folder Include="wwwroot\view-resources\Views\_Bundles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Manage\Profile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Manage\Profile.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RentalSharedResource\BanksBranches.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RentalSharedResource\CostCenters.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RentalSharedResource\Currencies.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RentalSharedResource\CustomerGroups.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RentalSharedResource\Customers.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RentalSharedResource\Departments.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RentalSharedResource\Nationalities.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Rentals\RecievePayments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\RentalSharedResource\Relationships.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\RentalSharedResource\Religions.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\RentalSharedResource\SupplierGroups.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\RentalSharedResource\Suppliers.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\RentalSharedResource\SystemNumbers.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\js\payroll\data-entry\employee-overtime.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\RentalSharedResource\BanksBranches.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\RentalSharedResource\CostCenters.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\RentalSharedResource\Currencies.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\RentalSharedResource\CustomerGroups.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\RentalSharedResource\Customers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\RentalSharedResource\Departments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\RentalSharedResource\Nationalities.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Rentals\RecievePayments.cshtml" />
+  </ItemGroup>
+</Project>

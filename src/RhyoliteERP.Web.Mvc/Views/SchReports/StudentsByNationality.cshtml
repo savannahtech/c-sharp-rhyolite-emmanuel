@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Reports | Students By Nationality";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Reports</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("StudentsByNationality","SchReports")"> Students By Nationality </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Students By Nationality </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-3"></div>
+
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <label> Nationality: </label>
+                                <select class="form-control mb-3" v-model="selectedNationalityId" ref="selectedNationalityId" v-on:change="getData()">
+                                    <option value="">Select Nationality</option>
+                                    <option :value="country.id" v-for="country in nationalityList">{{country.nationality}}</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <hr />
+
+                    <div style="height:auto;width:auto;min-height:500px;" id="reportView">  </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/school-manager/reports/students-by-nationality.js" asp-append-version="true"></script>

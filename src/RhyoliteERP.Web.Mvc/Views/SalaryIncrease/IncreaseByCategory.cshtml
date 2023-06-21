@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Increase By Category";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Setups</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("IncreaseByCategory","SalaryIncrease")"> Increase By Category </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Increase By Category </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+
+                    <div class="row">
+
+                        <div class="col-sm-2"></div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label> <strong> Employee Category: </strong>  </label>
+
+                                <select class="form-control mb-3" v-model="categoryId" ref="categoryId">
+                                    <option value=""> Select Category </option>
+                                    <option :value="category.id" v-for="category in categoryList"> {{category.name}} </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label> <strong> Salary Type: </strong>  </label>
+
+                                <select class="form-control" v-model="salaryType" ref="salaryType">
+                                    <option> Salaried </option>
+                                    <option> Hourly </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <label for="emailAddress3"><b>&nbsp;</b></label>
+                            <div class="form-group text-center" style="border: 1px solid #cacfe7; border-radius: 10px; padding: 0.75rem 1rem; justify-content: center">
+                                <div class="radio" style="width: 150px; display: inline-block;">
+                                    <label><input type="radio" v-model="isFixedAmount" name="IsFixedAmount" value="1"> &nbsp;&nbsp; <b> Fixed Amount ? </b></label>
+                                </div>
+                                <div class="radio" style="width: 150px; display: inline-block;">
+                                    <label><input type="radio" v-model="isFixedAmount" name="IsFixedAmount" value="0"> &nbsp;&nbsp; <b> % of Basic ? </b></label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group" v-if="isFixedAmount === '1'">
+                                <label> <strong> Amount: </strong>  </label>
+                                <input type="number" class="form-control" v-model="amount" placeholder="0">
+
+                            </div>
+
+                            <div class="form-group" v-if="isFixedAmount === '0'">
+                                <label> <strong> Percentage: </strong>  </label>
+                                <input type="number" class="form-control" v-model="percentage" placeholder="0">
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <fieldset class="form-group">
+                        <legend><span> Actions </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-2">
+
+                                <button type="button" class="alignright btn btn-primary" v-on:click="setIncrement()"> Set Increment  </button>
+
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" :disabled="isLoading || employeeList.length" class="alignright btn btn-primary" v-on:click="applyIncrement()">
+                                    Post
+
+                                    <div class="spinner-border" v-if="isLoading" role="status" aria-hidden="true" style="width: 20px; height: 20px"></div>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <hr />
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/js/payroll/salary-increase/increase-by-category.js" asp-append-version="true"></script>

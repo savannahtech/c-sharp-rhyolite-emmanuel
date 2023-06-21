@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Create Applicant";
+    Layout = "~/Views/Shared/Layout/_adminRentalLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Rentals </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("CreateApplicant","Rentals")"> Create Applicant </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Create Applicant </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+
+                    <div class="row">
+
+                        <div class="col-sm-2"></div>
+
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+                                <label> <b> First Name: </b> <font color="red">*</font> </label>
+                                <input type="text" class="form-control" v-model="firstName" ref="firstName" placeholder="First Name">
+                                <span class="text-danger" v-if="!$v.firstName.required && $v.firstName.$dirty"> First Name field is required </span>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label> <b> Primary Phone No #: </b> </label>
+                                <input type="text" class="form-control" v-model="primaryPhoneNo" ref="primaryPhoneNo" placeholder="Primary Phone No">
+                                <span class="text-danger" v-if="!$v.primaryPhoneNo.required && $v.primaryPhoneNo.$dirty"> Primary Phone No field is required </span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label> <b> Email:</b>  </label>
+                                <input type="email" class="form-control" v-model="email" ref="email" placeholder="Email">
+
+                            </div>
+
+                              <div class="form-group">
+                                <label> <strong> Unit: <font color="red">*</font> </strong>  </label>
+
+                                <input id="propertyUnitId" v-model="propertyUnitId" type="text" class="form-control" v-show="isPropertyUnitControlRendered" />
+
+                                <select class="form-control mb-3" v-if="propertyUnitList.length == 0 && !isPropertyUnitControlRendered">
+                                    <option> Select Unit </option>
+                                </select>
+
+                                <span class="text-danger" v-if="!$v.propertyUnitId.required && $v.propertyUnitId.$dirty"> Property Unit field is required </span>
+
+
+                            </div>
+
+                            
+
+                        </div>
+
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+
+                                <label> <b> Last Name: </b>  </label>
+                                <input type="text" class="form-control" v-model="lastName" ref="lastName" placeholder="Last Name">
+                                <span class="text-danger" v-if="!$v.lastName.required && $v.lastName.$dirty"> Last Name field is required </span>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label> <b> Secondary Phone No : </b>  </label>
+                                <input type="email" class="form-control" v-model="secondaryPhoneNo" ref="secondaryPhoneNo" placeholder="Secondary Phone No">
+
+                            </div>
+                             
+                            
+                            <div class="form-group">
+                                <label> <b> Property: </b>  </label>
+                                <input id="propertyId" v-model="propertyId" type="text" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-4">
+
+                            <button type="button" :disabled="isLoading" v-on:click="saveApplicant()" class="btn btn-primary" style="float: right;">
+                                
+                                Save
+                                <div class="spinner-border" v-if="isLoading" role="status" aria-hidden="true" style="width: 20px; height: 20px"></div>
+
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/property-rental/rentals/create-applicant.js" asp-append-version="true"></script>

@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Deduction Types";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Import Data</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("DeductionTypes","PayrollImportData")"> Deductions Types </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Deductions Types </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <form asp-controller="PayrollImportData" asp-action="UploadDeductionTypes" enctype="multipart/form-data" method="post">
+
+                        <div class="row">
+
+                            <div class="col-sm-3"> </div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong> Choose File: </strong>  <a style="color:#3498DB;" href="@Url.Action("DownloadDeductionTypesUploadSample","PayrollImportData")"> <b> Download Template </b></a> </label>
+                                    <input type="file" name="customFile" v-on:change="onFileUpload($event)" class="form-control" required>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-1">
+
+                                <div class="form-group">
+                                    <br />
+                                    <button type="submit" value="Upload" id="uploadBtn" :disabled="enableUpload" class="alignright btn btn-primary mt-2"> Import </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <script>
+
+        $(function () {
+            swal("Data Successfully Imported..!", "", "success");
+        });
+
+    </script>
+}
+
+<script src="~/js/payroll/import-data/import.js" asp-append-version="true"></script>

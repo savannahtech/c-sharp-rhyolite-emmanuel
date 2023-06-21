@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Notification Settings";
+    Layout = "~/Views/Shared/Layout/_adminRentalLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Rental Setups </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("MeterTypes","RentalSetups")"> Notification Settings </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Notification Settings </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+                     
+                    <fieldset class="form-group">
+                        <legend><span> Basic Settings </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-1">
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendPaymentSmsAlert"> <span> <strong> Send Payment SMS Alert </strong>   </span> <span class="checkmark"></span>
+                                    </label>
+
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendPaymentEmailAlert"> <span> <strong> Send Payment Email Alert </strong> </span> <span class="checkmark"></span>
+                                    </label>
+
+                                     <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendRentExpiryReminderSmsAlert"> <span> <strong> Send Rent Expiry Reminder SMS Alert </strong> </span> <span class="checkmark"></span>
+                                    </label>
+
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendRentExpiryReminderEmailAlert"> <span> <strong> Send Rent Expiry Reminder Email Alert </strong> </span> <span class="checkmark"></span>
+                                    </label>
+
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+ 
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendRentOnboardSmsAlert"> <span> <strong> Send Rent On board SMS Alert </strong> </span> <span class="checkmark"></span>
+                                    </label>
+
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendRentOnboardEmailAlert"> <span> <strong> Send Rent On board Email Alert </strong> </span> <span class="checkmark"></span>
+                                    </label>
+
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendLeaseRenewalSmsAlert"> <span> <strong> Send Lease Renewal SMS Alert</strong> </span> <span class="checkmark"></span>
+                                    </label>
+
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendLeaseRenewalEmailAlert"> <span> <strong> Send Lease Renewal Email Alert  </strong> </span> <span class="checkmark"></span>
+                                    </label>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <legend><span> Personal </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-1">
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendTenantBirthdaySmsAlert"> <span> <strong>  Send Tenant Birthday SMS Alert </strong>  </span> <span class="checkmark"></span>
+                                    </label>
+
+                                </div>
+
+                                <div class="form-group" v-if="sendTenantBirthdaySmsAlert">
+
+                                    <label> <b>  Tenant Birthday SMS Alert Template: </b>  </label>
+                                    <select class="form-control mb-3" v-model="tenantBirthdaySmsAlertTemplateId" ref="tenantBirthdaySmsAlertTemplateId">
+                                        <option value=""> Select Template </option>
+                                        <option :value="template.id" v-for="template in smsTemplateList"> {{ template.alias }} </option>
+                                    </select>
+                                </div>
+
+
+
+                            </div>
+
+                          
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="form-group">
+
+                        <legend><span> System Alerts </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-1">
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+
+                                    <label class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" v-model="sendSmsLowBalanceLimitAlert"> <span> <strong>  Send Sms Low Balance Limit Alert </strong>  </span> <span class="checkmark"></span>
+                                    </label>
+
+                                </div>
+
+                                <div class="form-group" v-if="sendSmsLowBalanceLimitAlert">
+
+                                    <label> <b>  SMS Low Balance Limit: </b> </label>
+                                    <input type="text" class="form-control" v-model="smsLowBalanceLimit" ref="smsLowBalanceLimit" placeholder="0">
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </fieldset>
+
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-4">
+
+                            <button type="button" :disabled="isLoading" v-on:click="saveNotificationsSettings()" class="btn btn-primary" style="float: right;">
+                                
+                                Save
+
+                                <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/property-rental/setups/notification-settings.js" asp-append-version="true"></script>

@@ -1,0 +1,337 @@
+﻿@{
+    ViewBag.Title = "Create/Update";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Students </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("CreateOrUpdate","Students")"> Create/Update </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Create or Update </h6>
+            <div class="element-box">
+
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <fieldset class="form-group">
+                        <legend><span> Search </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                            </div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <b> <strong> Select Class: </strong> </b> </label>
+                                    
+                                    <input id="classIdQuery" v-model="selectedClassId" type="text" class="form-control" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+
+                                    <label> <b> <strong> Select Student: </strong> </b> </label>
+
+                                    <input id="studentIdQuery" v-show="studentList.length > 0 && studentListControllInitialized" v-model="selectedStudentId" type="text" class="form-control" />
+
+                                    <select class="form-control mb-3" v-show="!studentListControllInitialized" v-model="selectedStudentId" ref="selectedStudentId">
+                                        <option value="">Select Student</option>
+                                    </select>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+                     
+                    <hr />
+
+                    <form id="stuForm">
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+
+                                <img src="https://res.cloudinary.com/rhyoliteprime/image/upload/v1533814738/images_6.png" class="height-150" style="width:150px" alt="member_info" id="studentImage">
+                                <br /> <br />
+                                <div class="custom-file col-md-10">
+                                    <input type="file" class="custom-file-input col-md-12" id="inputGroupFile01" name="myfile" onchange="previewImage(event)">
+                                    <label class="custom-file-label col-md-12" for="inputGroupFile01">Choose Image</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <b>  Student ID: </b> <span color="red">*</span> &nbsp; <a style="color:#3498DB;" v-on:click="generateStudentIdentifier()"><b> Generate </b></a> </label>
+                                    <input v-model="studentIdentifier" ref="studentIdentifier" type="text" class="form-control" placeholder="Student ID" />
+                                    <span class="text-danger" v-if="!$v.studentIdentifier.required && $v.studentIdentifier.$dirty && studentIdentifier == ''"> Student ID field is required </span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> First Name: </b> </label>
+                                    <input v-model="firstName" ref="firstName" type="text" class="form-control" placeholder="First Name" />
+                                    <span class="text-danger" v-if="!$v.firstName.required && $v.firstName.$dirty && firstName == ''"> First name field is required </span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Date of Birth: </b>  </label>
+                                    <input type="date" ref="dateOfBirth" class="form-control" v-model="dateOfBirth">
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> <b> Enrollment Date: </b>  </label>
+                                    <input type="date" ref="enrollmentDate" class="form-control" v-model="enrollmentDate">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Religion: </b>  </label>
+                                    <select class="form-control mb-3" v-model="religionId" ref="religionId">
+                                        <option value="">Select Religion</option>
+                                        <option :value="religion.id" v-for="religion in religionList">{{religion.name}}</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Academic Year Enrolled: </b>  </label>
+                                    <select class="form-control mb-3" v-model="academicYearId" ref="academicYearId">
+                                        <option value="">Select Academic Year</option>
+                                        <option :value="academicYear.id" v-for="academicYear in academicYearList">{{academicYear.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b>Home Address: </b>  </label>
+                                    <textarea class="form-control" placeholder="Home Address" ref="homeAddress" v-model="homeAddress"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Student Status: </b>  <font color="red">*</font> </label>
+                                    <select class="form-control mb-3" v-model="studentStatusId" ref="studentStatusId">
+                                        <option value="">Select Status</option>
+                                        <option :value="studentStatus.id" v-for="studentStatus in studentStatusList">{{studentStatus.name}}</option>
+                                    </select>
+                                    <span class="text-danger" v-if="!$v.studentStatusId.required && $v.studentStatusId.$dirty"> Student Status field is required </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <b> Last Name: </b>  </label>
+                                    <input type="text" class="form-control" v-model="lastName" ref="lastName" placeholder="Last Name">
+                                    <span class="text-danger" v-if="!$v.lastName.required && $v.lastName.$dirty && lastName == ''"> Last name field is required </span>
+
+                                </div>
+                                <div class="form-group">
+                                    <label> <b>Middle Name(s): </b> </label>
+                                    <input type="text" class="form-control" v-model="middleName" ref="middleName" placeholder="Middle Name(s)">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Nationality: </b>  </label>
+                                    <select class="form-control mb-3" v-model="nationalityId" ref="nationalityId">
+                                        <option value="">Select Nationality</option>
+                                        <option :value="country.id" v-for="country in nationalityList">{{country.nationality}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b>Gender:</b>  </label>
+                                    <select class="form-control" v-model="gender" ref="gender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>  <b>Enrollment Type : </b> </label>
+                                    <select class="form-control" v-model="enrollmentType" ref="enrollmentType">
+                                        <option>Day</option>
+                                        <option>Boarding</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Class: </b>  <font color="red">*</font> </label>
+                                    <select class="form-control mb-3" v-model="classId" ref="classId">
+                                        <option value="">Select Class</option>
+                                        <option :value="schClass.id" v-for="schClass in classList">{{schClass.className}}</option>
+                                    </select>
+                                    <span class="text-danger" v-if="!$v.classId.required && $v.classId.$dirty && classId == ''"> Class field is required </span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> City/Location: </b> </label>
+                                    <textarea class="form-control" placeholder="Enter City/Location: Address" v-model="cityOrLocation" ref="cityOrLocation"></textarea>
+
+                                    <span class="text-danger" v-if="!$v.cityOrLocation.required && $v.cityOrLocation.$dirty && cityOrLocation == ''"> City Or Location field is required </span>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    <hr />
+
+                    <h5>Parent Info</h5>
+
+                    <label class="checkbox checkbox-primary">
+                        <input type="checkbox" v-model="existingParent">
+                        <span> Existing Parent? </span>
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <form id="parForm" v-if="!existingParent">
+
+                        <div class="row">
+
+                            <div class="col-sm-3"></div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <b>1st Guardian's Name: </b> <font color="red">*</font> </label>
+                                    <input type="text" class="form-control" v-model="firstGuardianName" ref="firstGuardianName" placeholder="1st Guardian's Name">
+
+                                </div>
+                                <div class="form-group">
+                                    <label> <b> 1st Guardian's Phone No:</b>  </label>
+                                    <input type="tel" class="form-control" v-model="firstGuardianPhoneNo" ref="firstGuardianPhoneNo" placeholder="1st Guardian's Phone No">
+
+                                </div>
+                                <div class="form-group">
+                                    <label> <b> 1st Guardian's Email:</b>  </label>
+                                    <input type="email" class="form-control" v-model="firstGuardianEmail" ref="firstGuardianEmail" placeholder="1st Guardian's Email">
+
+                                </div>
+                                <div class="form-group">
+                                    <label> <b> 1st Guardian's Profession: </b> </label>
+                                    <input type="text" class="form-control" v-model="firstGuardianProfession" ref="firstGuardianProfession" placeholder="1st Guardian's Profession">
+
+                                </div>
+                                <div class="form-group">
+                                    <label> <b> 1st Guardian's Relationship: </b>  <font color="red">*</font> </label>
+                                    <select class="form-control mb-3" v-model="firstGuardianRelationshipId" ref="firstGuardianRelationshipId">
+                                        <option value="00000000-0000-0000-0000-000000000000">Select Relationship</option>
+                                        <option :value="relationship.id" v-for="relationship in relationshipList">{{relationship.name}}</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <b>2nd Guardian's Name: </b>  </label>
+                                    <input type="text" class="form-control" v-model="secondGuardianName" ref="secondGuardianName" placeholder="2nd Guardian's Name">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> 2nd Guardian's Phone No: </b> </label>
+                                    <input type="text" class="form-control" v-model="secondGuardianPhoneNo" ref="secondGuardianPhoneNo" placeholder="2nd Guardian's Phone No">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> 2nd Guardian's Email: </b>  </label>
+                                    <input type="text" class="form-control" v-model="secondGuardianEmail" ref="secondGuardianEmail" placeholder="2nd Guardian's Email">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> 2nd Guardian's Profession: </b>  </label>
+                                    <input type="text" class="form-control" v-model="secondGuardianProfession" ref="secondGuardianProfession" placeholder="2nd Guardian's Profession">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> 2nd Guardian's Relationship: </b>  </label>
+                                    <select class="form-control mb-3" v-model="secondGuardianRelationshipId" ref="secondGuardianRelationshipId">
+                                        <option value="00000000-0000-0000-0000-000000000000">Select Relationship</option>
+                                        <option :value="relationship.id" v-for="relationship in relationshipList">{{relationship.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    <div class="row" v-if="existingParent">
+
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+
+                                <label> Select Parent: <font color="red">*</font> </label>
+
+                                <select class="form-control mb-3" v-model="parentId" ref="parentId">
+                                    <option value="">Select Parent</option>
+                                    <option :value="parent.id" v-for="parent in parentList">{{parent.firstGuardianName}} ({{parent.firstGuardianPhoneNo}})</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+
+                            <button type="button" v-on:click="saveStudent()" :disabled="isLoading" class="btn btn-primary" style="float: right;">
+                                Save
+                                <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+                            </button>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/school-manager/students/create-or-update.js" asp-append-version="true"></script>

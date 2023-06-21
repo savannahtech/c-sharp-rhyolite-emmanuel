@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Salary Grade & Notches";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Setups</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("SalaryGradesNotches","PayrollSetups")"> Salary Grade &amp; Notches </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Salary Grade &amp; Notches </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/payroll/setups/salary-grade-notches.js" asp-append-version="true"></script>

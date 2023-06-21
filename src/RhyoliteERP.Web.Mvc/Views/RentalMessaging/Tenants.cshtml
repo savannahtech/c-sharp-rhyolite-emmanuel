@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "Messaging | Compose Tenant Message";
+    Layout = "~/Views/Shared/Layout/_adminRentalLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Messaging </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Tenant","RentalMessaging")"> Compose Message (Tenants) </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Compose Message (Tenants) </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-1">
+                        </div>
+
+
+                        <div class="col-sm-2">
+
+                            <label class="checkbox checkbox-primary mt-2">
+                                <input type="checkbox" v-model="isDirectMessage"> <span> <strong> Direct Message ? </strong>  </span> <span class="checkmark mt-2"></span>
+                            </label>
+                        </div>
+
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <label>  Subject: </label>
+                                <input id="msgSubject" v-model="subject" placeholder="Message Subject" type="text" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label>  Message Channel : </label>
+                                <select class="form-control" v-model="messagingChannel" ref="messagingChannel">
+                                    <option value="sms">SMS</option>
+                                    <option value="email">Email</option>
+                                    <option value="telegram">Telegram</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-3" v-show="isDirectMessage">
+
+                            <div class="form-group">
+
+                                <label> <strong> Select Tenant: </strong> <font color="red">*</font> </label>
+
+                                <input type="text" id="leaseTenantId" v-model="leaseTenantId" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-1"> </div>
+                        <div class="col-sm-10">
+
+                            <div class="form-group">
+                                <label> Message </label>
+
+                                <div class="btn-group dropup" style="top:23rem;position:absolute" v-if="showTokenPopupHelper && !isHelperInsertOperationComplete">
+
+                                    <div class="dropdown-menu show">
+
+                                        <a class="dropdown-item d-block font-weight-bold text-decoration" href="#" v-for="(token,index) in tokenExpressionList" :key="index" @@click.prevent="selectToken(token.expression)"> {{token.expression}} </a>
+
+                                    </div>
+
+                                </div>
+
+                                <textarea rows="4" class="form-control" ref="message" v-on:blur="hideSuggestionPopups()" placeholder="Type [ to insert a token expression ... Type @@ to insert a message template..." v-model="message" v-on:keyup="onMessageUpdated()"></textarea>
+
+                            </div>
+
+                            <p> <strong> Note: Type "[" in the text area to insert a token expression or Type @@ to insert a message template. </strong> </p>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <hr />
+
+                    <div class="row">
+
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" v-on:click="sendMessage()" :disabled="isLoading" class="btn btn-primary" style="float: right;">
+                                    {{sendingText}}
+                                    <div class="spinner-border" v-if="isLoading" role="status" aria-hidden="true" style="width: 20px; height: 20px"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="messageTemplates" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenteredScrollableTitle"> Message Templates </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <a href="#" class="d-block text-decoration-none message-template" v-for="(template,index) in smsTemplateList" :key="index" @@click.prevent="selectTemplate(template)">
+                            <div class="p-4 d-flex align-items-center mb-3 mx-0 border-dashed row">
+                                <div class="col-12 col-md-8">
+                                    <p class="font-weight-bold mb-1"> Alias: {{template.alias}} </p>
+                                    <p class="mb-1" ref="templateText">
+                                        {{template.messageContent}}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="tokens" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenteredScrollableTitle"> Token Expressions </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <a href="#" class="d-block text-decoration-none message-template" v-for="(token,index) in tokenExpressionList" :key="index" @@click.prevent="selectToken(token.expression)">
+                            <div class="col-12 col-md-8">
+                                <p class="mb-2" ref="tokenText">
+                                    {{token.expression}}
+                                </p>
+                            </div>
+                        </a>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/property-rental/messaging/tenants.js" asp-append-version="true"></script>

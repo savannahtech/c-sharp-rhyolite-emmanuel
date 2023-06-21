@@ -1,0 +1,98 @@
+﻿@using RhyoliteERP
+@using Abp.Authorization.Users
+@using Abp.Web.Security.AntiForgery
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@{
+    ViewBag.Title = "Modules";
+    AbpAntiForgeryManager.SetCookie(Context);
+    Layout = "~/Views/Shared/Layout/_adminTenantLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Manage </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Invoices","Manage")"> Invoices </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box" style="height: auto; width: auto; min-height: 655px;">
+        <div class="row pt-4">
+            <div class="col-sm-12">
+                <div class="element-wrapper" >
+                    <h6 class="element-header"> Billing &amp; Payment History </h6>
+                    <div class="element-box-tp">
+                        <div class="table-responsive">
+                            <table class="table table-padded">
+                                <thead>
+                                    <tr>
+                                        <th> Invoice No.</th>
+                                        <th> Service Type</th>
+                                        <th> Date</th>
+                                        <th> Amount</th>
+                                        <th> Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr v-for="invoice in invoiceList">
+                                        <td>
+                                            <div class="">  #{{invoice.invoiceNo}} </div>
+                                        </td>
+
+                                        <td>
+                                            <div class=""> {{invoice.serviceType}} </div>
+                                        </td>
+
+                                        <td> <span> {{invoice.creationTime | formatShortDate}}</span>  </td>
+
+                                        <td> <span> GHS {{invoice.amount | currency}} </span> </td>
+
+                                        <td v-if="invoice.status == 'pending'"><a class="badge badge-warning-inverted" href="#"> Pending </a></td>
+                                        
+                                        <td v-else><a class="badge badge-success-inverted" href="#"> Paid </a></td>
+
+                                        <td class="row-actions">
+
+                                            <a href="#" v-on:click="downloadAsPdf(invoice)">  <i class="os-icon os-icon-download"></i> </a>
+
+                                            <a href="#" v-on:click="settleInvoice(invoice)" v-if="invoice.status == 'pending'">  <i class="os-icon os-icon-navigation"></i> </a>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+ 
+                        </div>
+
+                        <div class="row justify-content-between" v-if="invoiceList.length">
+
+                                <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="dataTable1_info" role="status" aria-live="polite">Showing {{lowerBound}} - {{upperBound}} of {{totalCount}} records </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-7">
+
+                                    <div class="dataTables_paginate paging_simple_numbers">
+
+                                    <ul class="pagination justify-content-end">
+
+                                        <li class="paginate_button page-item" :class="{active: pageNo === page}" v-for="page in pageList" :key="page"><a href="#" aria-controls="dataTable1" data-dt-idx="1" tabindex="0" class="page-link" @@click.prevent="onPageChanged(page)"> {{ page }} </a></li>
+                                           
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+                         </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/js/manage/billing.js" asp-append-version="true"></script>

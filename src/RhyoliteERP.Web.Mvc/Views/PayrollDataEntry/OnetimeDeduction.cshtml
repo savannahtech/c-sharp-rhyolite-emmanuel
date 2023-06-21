@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Onetime Deduction";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Data Entry </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("OnetimeDeduction","PayrollDataEntry")"> Onetime Deduction </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Onetime Deduction </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-1"> </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label> <strong> Month: </strong>  </label>
+
+                                <select class="form-control mb-3" v-model="month">
+                                    <option value="1"> January </option>
+                                    <option value="2"> February </option>
+                                    <option value="3"> March </option>
+                                    <option value="4"> April </option>
+                                    <option value="5"> May </option>
+                                    <option value="6"> June </option>
+                                    <option value="7"> July </option>
+                                    <option value="8"> August </option>
+                                    <option value="9"> September </option>
+                                    <option value="10"> October </option>
+                                    <option value="11"> November </option>
+                                    <option value="12"> December </option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                         <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label> <strong> Year: </strong>  </label>
+                                <input type="number" class="form-control" v-model="year" placeholder="@DateTime.Now.Year">
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+                                <label> <strong> Deduction Type: </strong>  </label>
+                                <select class="form-control mb-3" v-model="deductionTypeId" ref="deductionTypeId">
+                                    <option value=""> Select Deduction Type </option>
+                                    <option :value="deductionType.id" v-for="deductionType in deductionTypeList">{{deductionType.name}}</option>
+                                </select>
+                                <span class="text-danger" v-if="!$v.deductionTypeId.required && $v.deductionTypeId.$dirty && deductionTypeId == ''"> Deduction Type field is required </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group" v-if="isFixedAmount === '1'">
+                                <label> <strong> Amount: </strong>  </label>
+                                <input type="number" class="form-control" v-model="amount" placeholder="0">
+
+                            </div>
+
+                            <div class="form-group" v-if="isFixedAmount === '0'">
+                                <label> <strong> Percentage: </strong>  </label>
+                                <input type="number" class="form-control" v-model="percentage" placeholder="0">
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <hr />
+
+                    <div class="row">
+
+                        <div class="col-sm-4"> </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group text-center" style="border: 1px solid #cacfe7; border-radius: 10px; padding: 0.75rem 1rem; justify-content: center">
+                                <div class="radio" style="width: 150px; display: inline-block;">
+                                    <label><input type="radio" v-model="isFixedAmount" name="IsFixedAmount" value="1"> &nbsp;&nbsp; <b> Fixed Amount ? </b></label>
+                                </div>
+                                <div class="radio" style="width: 150px; display: inline-block;">
+                                    <label><input type="radio" v-model="isFixedAmount" name="IsFixedAmount" value="0"> &nbsp;&nbsp; <b> % of Basic ? </b></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="alignright btn btn-primary" v-on:click="applyToAll()"> Apply To All </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/payroll/data-entry/onetime-deduction.js" asp-append-version="true"></script>

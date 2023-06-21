@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Reports | Employee Outstanding Loans";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Monthly Reports</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("MrEmployeeOutStandingLoans","PayrollReports")"> Employee Outstanding Loans </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Employee Outstanding Loans </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-1">  </div>
+
+                        <div class="col-sm-2 mx-3">
+
+                            <div class="form-group text-center" style="width: 180px; border: 1px solid #cacfe7; border-radius: 10px; padding: 0.75rem 1rem; justify-content: center">
+                                <div class="radio" style="width: 150px; display: inline-block;">
+                                    <label><input type="radio" v-model="reportType" name="ReportType" value="summary-report"> &nbsp;&nbsp; <b> Summary Report </b></label>
+                                </div>
+                                <div class="radio" style="width: 150px; display: inline-block;">
+                                    <label><input type="radio" v-model="reportType" name="ReportType" value="loan-type"> &nbsp;&nbsp; <b>  By Loan Type </b></label>
+                                </div>
+                                <div class="radio" style="width: 150px; display: inline-block;">
+                                    <label><input type="radio" v-model="reportType" name="ReportType" value="employee"> &nbsp;&nbsp; <b>  By Employee </b></label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3" v-show="reportType == 'loan-type' || reportType == 'employee'">
+
+                            <div class="form-group">
+                                <label> <strong> Loan Type: </strong>  </label>
+                                <select class="form-control mb-3" v-model="loanTypeId" ref="loanTypeId">
+                                    <option value=""> Loan Type </option>
+                                    <option :value="loanType.id" v-for="loanType in loanTypeList">{{loanType.name}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-3" v-show="reportType == 'employee'">
+
+                            <div class="form-group">
+                                <label> <strong> Select Employee: </strong>  </label>
+                                <input id="employeeId" v-model="employeeId" type="text" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+
+                    <div class="col-sm-2">
+
+                        <div class="form-group">
+                            <br />
+                            <button type="button" class="alignright btn btn-primary mt-2" v-on:click="getReportData()"> Search </button>
+
+                        </div>
+
+                    </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div style="height:auto;width:auto;min-height:500px;" id="reportView">  </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/payroll/monthly-reports/employee-outstanding-loans.js" asp-append-version="true"></script>

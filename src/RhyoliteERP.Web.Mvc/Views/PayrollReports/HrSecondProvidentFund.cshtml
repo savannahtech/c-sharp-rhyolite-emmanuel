@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Reports | Second Provident Fund";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Historical Reports </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("HrSecondProvidentFund","PayrollReports")"> Second Provident Fund </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Second Provident Fund </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-2">  </div>
+
+                        <div class="col-sm-3 ">
+
+                            <div class="form-group">
+                                <label> <strong> Select Report Type: </strong>  </label>
+                                <select class="form-control" v-model="reportType" ref="reportType">
+
+                                    <option value="summary-report"> Summary Report </option>
+                                    <option value="category"> By Category </option>
+                                    <option value="department"> By Department </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label> <strong> Month: </strong>  </label>
+
+                                <select class="form-control mb-3" v-model="month" v-on:change="getReportData()">
+                                    <option value="1"> January </option>
+                                    <option value="2"> February </option>
+                                    <option value="3"> March </option>
+                                    <option value="4"> April </option>
+                                    <option value="5"> May </option>
+                                    <option value="6"> June </option>
+                                    <option value="7"> July </option>
+                                    <option value="8"> August </option>
+                                    <option value="9"> September </option>
+                                    <option value="10"> October </option>
+                                    <option value="11"> November </option>
+                                    <option value="12"> December </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label> <strong> Year: </strong>  </label>
+                                <input type="number" class="form-control" v-model="year" placeholder="@DateTime.Now.Year">
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="alignright btn btn-primary mt-2" v-on:click="getReportData()"> Search </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr />
+
+                    <div style="height:auto;width:auto;min-height:500px;" id="reportView">  </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/payroll/historical-reports/second-provident-fund.js" asp-append-version="true"></script>

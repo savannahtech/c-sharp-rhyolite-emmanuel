@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Chart of Accounts Details";
+    Layout = "~/Views/Shared/Layout/_adminLedgerLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Setups</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ChartOfAccountControl","LedgerSetups")"> Chart of Accounts Details </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Chart of Accounts Details </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/gl/setups/chart-of-account-detail.js"></script>

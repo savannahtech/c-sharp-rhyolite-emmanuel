@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Benefits in Kind Types & Rates";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Setups</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("BikTypesRates","PayrollSetups")"> Benefits in Kind Types & Rates </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Benefits in Kind Types & Rates </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/payroll/setups/bik-types-rates.js" asp-append-version="true"></script>

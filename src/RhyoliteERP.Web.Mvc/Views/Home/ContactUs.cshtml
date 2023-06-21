@@ -1,0 +1,283 @@
+﻿@using RhyoliteERP.Web.Helpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title> Rhyolite ERP – The leading Cloud ERP Platform </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rhyolite ERP – Saas ERP Platform" />
+    <meta name="keywords" content="School Management,Terminal Reports Automation, Saas ERP Platform, Accounting " />
+    <meta content="RhyolitePrime" name="author" />
+    <!-- favicon -->
+    <link href="https://res.cloudinary.com/rhyoliteprime/image/upload/v1677481688/rhyolite/favicon.ico" rel="shortcut icon">
+    <link href="https://res.cloudinary.com/rhyoliteprime/image/upload/v1677481762/rhyolite/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- WOW Animation -->
+    <link href="~/assets/public/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap css -->
+    <link href="~/assets/public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Slick Slider -->
+    <link href="~/assets/public/css/slick.css" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link href="~/assets/public/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/public/css/line-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/public/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Main css File -->
+    <link href="~/assets/public/css/style.css" rel="stylesheet" type="text/css" id="theme-default" />
+    <link href="~/assets/public/css/rtl-style.css" rel="stylesheet" type="text/css" id="rtl-theme-default" disabled="disabled" />
+    <link href="~/assets/public/css/colors/default-color.css" rel="stylesheet" type="text/css" id="theme-color" />
+
+</head>
+<body>
+    <!-- box-wrapper -->
+    <div class="box-wrapper">
+
+        <!-- Nav Bar -->
+        <header id="master-head" class="navbar menu-center">
+            <div class="container-fluid">
+                <div id="main-logo" class="logo-container">
+                    <a class="logo" href="@Url.Action("Index", "Home")">
+                        <img src="https://res.cloudinary.com/rhyoliteprime/image/upload/v1676365656/rhyolite/rhyoliteprime-logo-05.png" class="logo-dark" alt="RhyolitePrime">
+                    </a>
+                </div>
+                <div class="menu-toggle-btn">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle">
+                        <div class="burger-lines">
+                        </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </div>
+                <div id="navigation" class="nav navbar-nav navbar-main">
+                    <ul id="main-menu" class="menu-primary">
+
+                        <li class="menu-item @Html.IsActive(ViewContext, new[] {"Home"}, new []{"Index"})"><a href="@Url.Action("Index", "Home")"> Home </a></li>
+                        <li class="menu-item @Html.IsActive(ViewContext, new[] {"Home"}, new []{"About"})"><a href="@Url.Action("About", "Home")"> About </a></li>
+                        <li class="menu-item @Html.IsActive(ViewContext, new[] {"Home"}, new []{"ContactUs"})"><a href="@Url.Action("ContactUs", "Home")"> Contact Us </a></li>
+                        @* <li class="menu-item @Html.IsActive(ViewContext, new[] {"Home"}, new []{"Careers"})"><a href="@Url.Action("Careers", "Home")"> Careers </a></li>*@
+
+                    </ul>
+                </div>
+                <div class="navbar-right">
+                    <div class="menu-button">
+                        <a href="@Url.Action("Login", "Account")" target="_blank">
+                            <div class="btn btn-primary">sign in</div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        <!-- Nav Bar -->
+        <!-- Main Wrapper -->
+        <div id="main-wrapper" class="page-wrapper">
+            <div class="inner-page-header section-padding style-dark">
+                <div class="container">
+                    <div class="page-title-inner text-center clearfix">
+                        <div class="heading-wrapper">
+                            <h1 class="h1">Contact Us</h1>
+                            <div class="lead-text">
+
+                            </div>
+                        </div><!-- End Heading -->
+                        <ul class="st-breadcrumb">
+                            <li><a href="@Url.Action("Index", "Home")"> Home </a></li>
+                            <li class="active"><span>Contact Us</span></li>
+                        </ul><!-- End Breadcrumb -->
+                    </div><!-- Page Title Inner -->
+                </div>
+            </div>
+            <!-- Page Header -->
+            <div class="about-section section-padding">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-4">
+                            <div class="contact-info-box wow fadeInLeft" data-wow-delay="0.8s">
+                                <div class="contact-wrapper">
+                                    <div class="icon">
+                                        <i class="mdi mdi-phone-incoming-outline"></i>
+                                    </div>
+                                    <div class="content">
+                                        <h4>Phone</h4>
+                                        <p>Our customer care is open from Mon-Fri, 8:00 am to 10:00 pm</p>
+                                        <p><a class="btn link-btn" href="tel:0302919357"> 030-291-9357 </a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-info-box wow fadeInLeft" data-wow-delay="1s">
+                                <div class="contact-wrapper">
+                                    <div class="icon">
+                                        <i class="mdi mdi-email-open-outline"></i>
+                                    </div>
+                                    <div class="content">
+                                        <h4>Email</h4>
+                                        <p> Get a free consultation to help accelerate your business. Our support team will respond to your requests irrespective of time zones </p>
+                                        <p><a class="btn link-btn" href="mailto:info@rhyoliteprime.com"> info@rhyoliteprime.com </a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Col -->
+                        <div class="col-lg-8">
+                            <div class="heading-wrapper with-separator">
+                                <span class="sub-title">Get in touch</span>
+                                <h2 class="h1"><span>Connect</span> with us</h2>
+                            </div><!-- End Heading -->
+                            <div class="text-wrapper">
+                                <p>Please contact us using the details below. For more information about our services, please visit the corresponding page on our web.</p>
+                            </div>
+                            <div class="contact-form">
+                                <form method="post">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <input type="text" class="form-control" id="FiratName" placeholder="First Name" required="">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <input type="text" class="form-control" id="LastName" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Email Address" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="subject" placeholder="How can we help you?" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" placeholder="Tell me more about your requirement"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="Send Message">
+                                    </div>
+                                </form>
+                            </div>
+                        </div><!-- End Col -->
+                    </div><!-- End Row -->
+                </div>
+            </div><!-- About Section -->
+            <div class="map-custom-embed">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.407382758977!2d-0.3068135495510736!3d5.654061895881367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdfa13840f9eecf%3A0xeb57db46d23f3f6a!2sAdinkra%20Creation%20Limited%2FFedex%20Ship%20Centre!5e0!3m2!1sen!2sgh!4v1652768009199!5m2!1sen!2sgh" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+        </div>
+        <!-- Main Wrapper -->
+        <footer class="site-footer footer-theme-two">
+            <div class="container">
+                <div class="main-footer style-dark">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="widget">
+                                <div class="text-widget">
+                                    <div class="about-info">
+                                        @*
+                                                  <div class="image-wrapper">
+                                                <img src="~/assets/public/images/logo-no-bg.png" alt=""/>
+                                            </div>
+
+                                        *@
+
+                                        <p> RhyolitePrime is software consulting and product development company which specializes in delivering cutting edge solutions in business process automation and customized application development. We implement systems that enforces reliability, efficiency and general automation for businesses processes at large.</p>
+                                    </div>
+                                    <div class="playstore-widget">
+                                        <h3>Download the App</h3>
+                                        <ul>
+                                            <li class="google"><a href="#">Google Play</a></li>
+                                            @* <li class="apple"><a href="#">App Store</a></li> *@
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- End Widget -->
+                        </div><!-- End Col -->
+                        <div class="col-lg-2">
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h3 class="title">Useful Links</h3>
+                                </div>
+                                <div class="text-widget">
+                                    <div class="footer-nav">
+                                        <ul>
+                                            <li><a href="#"> Documentation </a></li>
+                                            <li><a href="@Url.Action("ContactUs", "Home")"> Contact Us </a></li>
+                                            <li><a href="@Url.Action("About", "Home")"> About Us</a></li>
+                                            <li><a href="#">Terms of Service</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- End Widget -->
+                        </div><!-- End Col -->
+                        <div class="col-lg-2">
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h3 class="title">Support</h3>
+                                </div>
+                                <div class="text-widget">
+                                    <div class="footer-nav">
+                                        <ul>
+                                            <li><a href="https://api.rhyoliteprime.com" target="_blank">API</a></li>
+                                            <li><a href="@Url.Action("About", "Home")#faqsection">FAQ</a></li>
+                                            <li><a href="#">Community</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- End Widget -->
+                        </div><!-- End Col -->
+                        <div class="col-lg-4">
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h3 class="title">Stay Updated</h3>
+                                </div>
+                                <div class="text-widget">
+                                    <div class="contact-info">
+                                        <ul>
+                                            <li class="email-field">info@rhyoliteprime.com</li>
+                                            <li class="phone-field">+(233) 30-291-9357</li>
+                                            <li class="address-field">Pentecost Signboard, Off Ablekuma-Awoshie, Accra</li>
+                                        </ul>
+                                    </div>
+                                    @*
+                                             <div class="social-media-links">
+                                            <ul>
+                                                <li><a target="_blank" href="https://www.facebook.com/sacredthemes/"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a target="_blank" href="https://www.linkedin.com/company/sacredthemes/"><i class="fab fa-linkedin-in"></i></a></li>
+                                                <li><a target="_blank" href="https://twitter.com/SacredThemes"><i class="fab fa-twitter"></i></a></li>
+                                            </ul>
+                                        </div>
+
+                                    *@
+
+                                </div>
+                            </div><!-- End Widget -->
+                        </div><!-- End Col -->
+                    </div><!-- End Row -->
+                </div>
+                <div class="copyright-bar style-dark">
+                    <div class="copyright-text text-center">
+
+                        © Copyright RhyoliteERP @DateTime.Now.Year.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Main Footer -->
+
+    </div>
+    <!-- box-wrapper -->
+
+
+    <script src="~/assets/public/js/jquery.min.js"></script>
+    <script src="~/assets/public/js/jquery-migrate.min.js"></script>
+    <script src="~/assets/public/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/public/js/jquery.easing.min.js"></script>
+    <script src="~/assets/public/js/scrollspy.min.js"></script>
+    <script src="~/assets/public/js/appear.js"></script>
+    <!-- WOW Animation -->
+    <script src="~/assets/public/js/wow.min.js"></script>
+    <!-- Slick Slider -->
+    <script src="~/assets/public/js/slick.min.js"></script>
+    <!-- Main Js -->
+    <script src="~/assets/public/js/dcode.js"></script>
+
+</body>
+
+</html>

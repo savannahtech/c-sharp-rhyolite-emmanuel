@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>RhyoliteERP.Application</AssemblyName>
+    <PackageId>RhyoliteERP.Application</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>RhyoliteERP</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RhyoliteERP.Core\RhyoliteERP.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\Ap\ApInvoiceHists\Dto\" />
+    <Folder Include="Services\Ap\ApInvoices\Dto\" />
+    <Folder Include="Services\Ap\ApPayments\Dto\" />
+    <Folder Include="Services\Ap\ApVouchers\Dto\" />
+    <Folder Include="Services\Ap\ArOpeningBalances\Dto\" />
+    <Folder Include="Services\Ap\OpeningBalances\Dto\" />
+    <Folder Include="Services\Ap\PaymentApprovals\Dto\" />
+    <Folder Include="Services\Ar\ArInvoices\Dto\" />
+    <Folder Include="Services\Ar\ArPayments\Dto\" />
+    <Folder Include="Services\Ar\Quotations\Dto\" />
+    <Folder Include="Services\Hr\" />
+    <Folder Include="Services\Ledger\AccountBalances\" />
+    <Folder Include="Services\Ledger\AccountingPeriods\Dto\" />
+    <Folder Include="Services\Ledger\Budgets\Dto\" />
+    <Folder Include="Services\Ledger\Imprests\Dto\" />
+    <Folder Include="Services\Ledger\JournalHistories\" />
+    <Folder Include="Services\Ledger\Journals\Dto\" />
+    <Folder Include="Services\Ledger\PvRetensions\Dto\" />
+    <Folder Include="Services\Payroll\EmployeeLoanRepaymentSchedules\Dto\" />
+    <Folder Include="Services\Payroll\LoanApplications\Dto\" />
+    <Folder Include="Services\Payroll\PaymasterHistory\" />
+    <Folder Include="Services\Payroll\Paymasters\" />
+    <Folder Include="Services\Payroll\SalaryAdvanceApplications\Dto\" />
+    <Folder Include="Services\School\CancelledBills\Dto\" />
+    <Folder Include="Services\School\CancelledPayments\Dto\" />
+    <Folder Include="Services\Stock\InventoryItems\" />
+    <Folder Include="Services\Stock\ItemCategories\" />
+    <Folder Include="Services\Stock\ModeOfShipments\" />
+    <Folder Include="Services\Stock\PurchaseOrderStatuses\" />
+    <Folder Include="Services\Stock\PurchaseOrders\" />
+    <Folder Include="Services\Stock\ReturnIssuedStockDetails\" />
+    <Folder Include="Services\Stock\ReturnIssuedStocks\" />
+    <Folder Include="Services\Stock\StockIssues\" />
+    <Folder Include="Services\Stock\StockReceipts\" />
+    <Folder Include="Services\Stock\StockTransfers\" />
+    <Folder Include="Services\Stock\Uom\" />
+    <Folder Include="Services\Stock\WareHouses\" />
+  </ItemGroup>
+</Project>

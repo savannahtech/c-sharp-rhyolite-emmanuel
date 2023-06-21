@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Reports | Allowances";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Monthly Reports</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("MrLoanDeductions","PayrollReports")"> Allowances </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Allowances </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-2">  </div>
+
+                        <div class="col-sm-3 ">
+
+                            <div class="form-group">
+
+                                <label> <strong> Select Report Type: </strong>  </label>
+                                <select class="form-control" v-model="reportType" ref="reportType">
+                                    <option value="summary-report"> Summary Report </option>
+                                    <option value="category"> By Category </option>
+                                    <option value="department"> By Department </option>
+                                    <option value="allowance-type"> By Allowance Type </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-3" v-show="reportType == 'allowance-type'">
+
+                            <div class="form-group">
+
+                                <label> <strong> Allowance Type: </strong>  </label>
+                                <select class="form-control mb-3" v-model="allowanceTypeId" ref="allowanceTypeId">
+                                    <option value=""> Select Allowance Type </option>
+                                    <option :value="allowanceType.id" v-for="allowanceType in allowanceTypeList"> {{allowanceType.name}} </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="alignright btn btn-primary mt-2" v-on:click="getReportData()"> Search </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div style="height:auto;width:auto;min-height:500px;" id="reportView">  </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/payroll/monthly-reports/allowances.js" asp-append-version="true"></script>

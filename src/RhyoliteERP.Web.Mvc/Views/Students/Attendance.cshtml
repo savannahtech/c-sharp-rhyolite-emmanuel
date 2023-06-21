@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Attendance";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Students</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Attendance","Students")"> Attendance </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Attendance </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-sm-7">
+
+                            <div class="form-actions">
+                                <button type="button" v-on:click="resetForm()" class="btn btn-danger">Cancel</button>
+                                <button type="button" v-on:click="saveAttendance()" class="btn btn-primary">
+                                    Save
+
+                                    <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+
+                    <hr />
+
+                    <form id="caForm">
+
+                        <div class="row">
+
+                            <div class="col-md-1"></div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label>  Class: </label>
+                                    <select class="form-control mb-3" v-model="classId" ref="classId">
+                                        <option value="">Select Class</option>
+                                        <option :value="schClass.id" v-for="schClass in classList">{{schClass.className}}</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong>Attendance Date:</strong> </label>
+                                    <input type="date" ref="attendanceDate" class="form-control" v-model="attendanceDate">
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong> No. Present: </strong>  </label>
+                                    <input type="number" class="form-control" v-model="noPresent" ref="noPresent" placeholder="0" readonly>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+                                <br />
+                                <button type="button" v-on:click="getStudentsPresent()" class="btn btn-primary mt-2">
+                                    Mark Present
+
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    <hr />
+
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+
+<script src="~/js/school-manager/students/attendance.js" asp-append-version="true"></script>

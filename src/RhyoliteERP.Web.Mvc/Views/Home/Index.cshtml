@@ -1,0 +1,404 @@
+﻿@using RhyoliteERP.Web.Helpers
+@{
+
+    Layout = null;
+}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title> RhyoliteERP – The leading Cloud ERP Platform </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rhyolite ERP – Saas ERP Platform" />
+    <meta name="keywords" content="School Management Software in Ghana,Ghanaian Based School Management Platform,Terminal Reports Automation, Student Bills Automation, Saas ERP Platform, Accounting, Payroll, Best School Management Platform" />
+    <meta content="RhyolitePrime" name="author" />
+    <!-- favicon -->
+    <link href="https://res.cloudinary.com/rhyoliteprime/image/upload/v1677481688/rhyolite/favicon.ico" rel="shortcut icon">
+    <link href="https://res.cloudinary.com/rhyoliteprime/image/upload/v1677481762/rhyolite/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- WOW Animation -->
+    <link href="~/assets/public/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap css -->
+    <link href="~/assets/public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Slick Slider -->
+    <link href="~/assets/public/css/slick.css" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link href="~/assets/public/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/public/css/line-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/public/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Main css File -->
+    <link href="~/assets/public/css/style.css" rel="stylesheet" type="text/css" id="theme-default" />
+    <link href="~/assets/public/css/rtl-style.css" rel="stylesheet" type="text/css" id="rtl-theme-default" disabled="disabled" />
+    <link href="~/assets/public/css/colors/default-color.css" rel="stylesheet" type="text/css" id="theme-color" />
+
+
+</head>
+<body>
+    <!-- box-wrapper -->
+    <div class="box-wrapper">
+
+        <!-- Nav Bar -->
+        <header id="master-head" class="navbar menu-absolute menu-center">
+            <div class="container">
+                <div id="main-logo" class="logo-container">
+                    <a class="logo" href="@Url.Action("Index", "Home")">
+                        <img src="https://res.cloudinary.com/rhyoliteprime/image/upload/v1676365656/rhyolite/rhyoliteprime-logo-05.png" class="logo-dark" alt="RhyolitePrime">
+                    </a>
+                </div>
+                <div class="menu-toggle-btn">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle">
+                        <div class="burger-lines">
+                        </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </div>
+                <div id="navigation" class="nav navbar-nav navbar-main">
+                    <ul id="main-menu" class="menu-primary">
+
+                        <li class="menu-item @Html.IsActive(ViewContext, new[] {"Home"}, new []{"Index"})"><a href="@Url.Action("Index", "Home")"> Home </a></li>
+                        <li class="menu-item @Html.IsActive(ViewContext, new[] {"Home"}, new []{"About"})"><a href="@Url.Action("About", "Home")"> About </a></li>
+                        <li class="menu-item @Html.IsActive(ViewContext, new[] {"Home"}, new []{"ContactUs"})"><a href="@Url.Action("ContactUs", "Home")"> Contact Us </a></li>
+                        @* <li class="menu-item @Html.IsActive(ViewContext, new[] {"Home"}, new []{"Careers"})"><a href="@Url.Action("Careers", "Home")"> Careers </a></li>*@
+
+                    </ul>
+                </div>
+                <div class="navbar-right">
+                    <div class="menu-button">
+                        <a href="@Url.Action("Login", "Account")" target="_blank">
+                            <div class="btn btn-primary">sign in</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Nav Bar -->
+        <!-- Main Wrapper -->
+        <div id="main-wrapper" class="page-wrapper">
+            <div class="page-header section-padding full-height dc-five">
+                <div class="container">
+                    <div class="row align-items-center flex-row-reverse">
+                        <div class="col-lg-6">
+                            <div class="image-wrapper">
+                                <img src="~/assets/public/images/default-color/erp-system-img.png" alt="" />
+                            </div>
+                        </div><!-- End Col -->
+                        <div class="col-lg-6">
+                            <div class="heading-wrapper with-separator wow fadeInLeft" data-wow-delay="0.2s">
+                                <h1>How schools benefit from  <span> Rhyolite ERP </span></h1>
+                            </div>
+                            <div class="text-wrapper wow fadeInLeft" data-wow-delay="0.4s">
+                                <p> Rhyolite school management software comes with an incredible set of customizable features to assist with your school administration tasks and complex processes. Get the Cloud ERP solution that helps rapid-growth businesses thrive in the digital economy. </p>
+                            </div>
+                            <div class="btn-wrapper wow fadeInUp" data-wow-delay="0.4s">
+                                <a class="btn btn-primary" href="@Url.Action("Register", "Account")" target="_blank">Get started</a>
+                            </div>
+                        </div><!-- End Col -->
+                    </div><!-- End Row -->
+                </div>
+            </div>
+            <!-- Page Header -->
+            <div class="features-section section-padding">
+                <div class="container">
+                    <div class="row clearfix align-items-center justify-content-between">
+                        <div class="col-lg-5">
+                            <div class="heading-wrapper with-separator">
+                                <h2 class="h1"> Why <span> Rhyolite ERP </span> ?</h2>
+                            </div>
+                            <!-- End Heading -->
+                            <div class="text-wrapper">
+                                <p class="lead-text">Rhyolite ERP was built around customer, not shareholder requirements.</p>
+                                <p>Flexible deployment options: public or private cloud. Enjoy ERP implementations without hidden fees Scaling users and resources up or down as needed </p>
+                            </div>
+                            <div class="btn-wrapper">
+                                <a href="@Url.Action("Register", "Account")" class="btn btn-primary"> Discover More </a>
+                            </div>
+                            <div class="d-lg-none d-xl-block empty-space-30"></div>
+                        </div><!-- End Col -->
+                        <div class="col-lg-6">
+                            <div class="row inner-row clearfix">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="features-block theme-one wow fadeInUp">
+                                        <div class="inner-box">
+                                            <div class="icon">
+                                                <img class="normal" src="~/assets/public/images/default-color/icon-2.svg" alt="">
+                                                <img class="hover" src="~/assets/public/images/default-color/icon-2-light.svg" alt="">
+                                            </div>
+                                            <div class="text">
+                                                <h4>Easy to implement and use</h4>
+                                                <p>Easily integrate the tools and systems you already use</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Col -->
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="features-block theme-one wow fadeInUp" data-wow-delay="0.2s">
+                                        <div class="inner-box">
+                                            <div class="icon">
+                                                <img class="normal" src="~/assets/public/images/default-color/icon-24.svg" alt="">
+                                                <img class="hover" src="~/assets/public/images/default-color/icon-24-light.svg" alt="">
+                                            </div>
+                                            <div class="text">
+                                                <h4> Advanced Reporting </h4>
+                                                <p> Simplify and synchronize automation across multiple workflows </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Col -->
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="features-block theme-one wow fadeInUp" data-wow-delay="0.2s">
+                                        <div class="inner-box">
+                                            <div class="icon">
+                                                <img class="normal" src="~/assets/public/images/default-color/icon-4.svg" alt="">
+                                                <img class="hover" src="~/assets/public/images/default-color/icon-4-light.svg" alt="">
+                                            </div>
+                                            <div class="text">
+                                                <h4>Access data anywhere anytime</h4>
+                                                <p>Gain real-time business insights from a single source of truth</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Col -->
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="features-block theme-one wow fadeInUp" data-wow-delay="0.4s">
+                                        <div class="inner-box">
+                                            <div class="icon">
+                                                <img class="normal" src="~/assets/public/images/default-color/icon-25.svg" alt="">
+                                                <img class="hover" src="~/assets/public/images/default-color/icon-25-light.svg" alt="">
+                                            </div>
+                                            <div class="text">
+                                                <h4>A cost-effective solution</h4>
+                                                <p> Modern pay-as-you-go, consumption-based licensing that can grow/shrink with your needs </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Col -->
+                            </div><!-- End Row -->
+                        </div>
+                        <!-- End Col -->
+                    </div><!-- End Row -->
+                </div>
+            </div>
+            <!-- Features Section -->
+            <div class="section-padding border-top">
+                <div class="container">
+                    <div class="row clearfix align-items-center">
+                        <div class="col-lg-6">
+                            <div class="image-wrapper">
+                                <img src="~/assets/public/images/default-color/erp-mobileapp-features.png" alt="">
+                            </div>
+                        </div><!-- End Col -->
+                        <div class="col-lg-6">
+                            <div class="heading-wrapper with-separator">
+                                <h2 class="h1"> A platform that simplifies <span> business </span></h2>
+                            </div><!-- End Heading -->
+                            <div class="text-wrapper">
+                                <p> Rhyolite ERP is born in the cloud, built to meet the ever-evolving needs of businesses and their customers. Depending on the needs of your business you can choose from several modules that best suits you </p>
+                                <ul class="list-style-one two-col">
+                                    <li><strong> School Manager</strong></li>
+                                    <li><strong> General Ledger</strong></li>
+                                    <li><strong> Payroll </strong></li>
+                                    <li><strong> Accounts Payables</strong></li>
+                                    <li><strong> Accounts Recievables </strong></li>
+                                    <li><strong> Stock Management</strong></li>
+                                     
+                                </ul>
+                            </div>
+                        </div><!-- End Col -->
+                    </div><!-- End Row -->
+                </div>
+            </div>
+            <div class="benefits-section section-padding style-dark dark-bg gradient-heading-bg">
+                <div class="container">
+                    <div class="row clearfix justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="heading-wrapper text-center">
+                                <h2 class="h1"><span> Benefits </span> of Rhyolite ERP Software </h2>
+                                <div class="lead-text">
+
+                                    <p> Rhyolite Cloud ERP is built on a future-proof platform with open architecture for rapid integration, scalability, and ease of use. </p>
+                                </div>
+                            </div><!-- End Heading -->
+                            <div class="empty-space-60 clearfix"></div>
+                        </div><!-- End Col -->
+                    </div><!-- End Row -->
+                    <div class="row clearfix">
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="features-block theme-two wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="inner-box">
+                                    <div class="text">
+                                        <h4>Saving you money</h4>
+                                        <p> Automating your processes means that you free up costs on administrative and operational costs within the business. Actively manage day-to-day operations and prevent further delays that inevitably cost the business money.  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Col -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="features-block theme-two wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="inner-box">
+                                    <div class="text">
+                                        <h4>Flexibility</h4>
+                                        <p> Rhyolite will quickly adapt to the changing needs of your business, so as your business grows, so will your ERP instance. The system is equipped to fit any size business and also makes room for tailor made features. </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Col -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="features-block theme-two wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="inner-box">
+                                    <div class="text">
+                                        <h4>Paperless Administration</h4>
+                                        <p> Data is available centrally across all business functions and accessible via a mobile device or PC. Decision-makers can access all data, operations, and production in real-time – no waiting for feedback. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Col -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="features-block theme-two wow fadeInUp">
+                                <div class="inner-box">
+                                    <div class="text">
+                                        <h4> Productivity </h4>
+                                        <p> Gain a More Agile Business by eliminating redundant processes, automating tedious tasks, allowing your employees to save time and involve in activities that are more productive for your business. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Col -->
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="features-block theme-two wow fadeInUp" data-wow-delay="0.4s">
+                                <div class="inner-box">
+                                    <div class="text">
+                                        <h4>Information Accessibility</h4>
+                                        <p> With an Rhyolite ERP, data is available in real-time, allowing your business to respond to ever-changing market conditions efficiently and effectively.It enables you to make informed decisions based on readily available reports. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Col -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="features-block theme-two wow fadeInUp">
+                                <div class="inner-box">
+                                    <div class="text">
+                                        <h4>3rd Party Integration</h4>
+                                        <p>
+                                            Rhyolite strictly adheres to the industry standards. Third party packages like Payment Gateways and SMS have been incorporated and can be changed per needs, allowing you to deliver better services.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- End Col -->
+                    </div><!-- End Row -->
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Main Wrapper -->
+        <footer class="site-footer footer-theme-two">
+            <div class="container">
+                <div class="main-footer style-dark">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="widget">
+                                <div class="text-widget">
+                                    <div class="about-info">
+                                        <div class="image-wrapper">
+                                            <img src="images/d-code-logo-light.svg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="newsletter-form style-two align-left">
+                                        <h3>Sign up and receive the latest news via email.</h3>
+                                        <form method="post">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" id="EmailInput" placeholder="Enter email address" required="">
+                                            </div>
+                                            <button type="submit">Subscribe Now!</button>
+                                        </form>
+                                    </div>
+                                    @*
+                                             <div class="social-media-links">
+                                            <h3>Follow Us:</h3>
+                                            <ul>
+                                                <li><a target="_blank" href="https://www.facebook.com/sacredthemes/"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a target="_blank" href="https://www.linkedin.com/company/sacredthemes/"><i class="fab fa-linkedin-in"></i></a></li>
+                                                <li><a target="_blank" href="https://twitter.com/SacredThemes"><i class="fab fa-twitter"></i></a></li>
+                                            </ul>
+                                        </div>
+
+                                    *@
+
+                                </div>
+                            </div><!-- End Widget -->
+                        </div><!-- End Col -->
+                        <div class="col-lg-4">
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h3 class="title">Contact Inforamtion</h3>
+                                </div>
+                                <div class="text-widget">
+                                    <div class="contact-info theme-two">
+                                        <ul>
+                                            <li class="address-field"><label> Head Office</label> Pentecost Signboard, Off Ablekuma-Awoshie, Accra </li>
+                                            <li class="email-field">info@rhyoliteprime.com</li>
+                                            <li class="phone-field">+(233) 55-385-9517</li>
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div><!-- End Widget -->
+                        </div><!-- End Col -->
+                        <div class="col-lg-3">
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h3 class="title">Useful Links</h3>
+                                </div>
+                                <div class="text-widget">
+                                    <div class="footer-nav">
+                                        <ul>
+                                            <li><a href="https://api.rhyoliteprime.com" target="_blank">API</a></li>
+                                            <li><a href="@Url.Action("About", "Home")#faqsection">FAQ</a></li>
+                                            <li><a href="@Url.Action("ContactUs", "Home")"> Contact Us </a></li>
+                                            <li><a href="@Url.Action("About", "Home")"> About Us</a></li>
+                                            <li><a href="@Url.Action("Terms", "Home")">Terms of Service</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- End Widget -->
+                        </div><!-- End Col -->
+                    </div><!-- End Row -->
+                </div>
+                <div class="copyright-bar style-dark">
+                    <div class="copyright-text text-center">
+                        © Copyright RhyoliteERP @DateTime.Now.Year.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!--search-form-->
+    <!-- javascript -->
+    <script src="~/assets/public/js/jquery.min.js"></script>
+    <script src="~/assets/public/js/jquery-migrate.min.js"></script>
+    <script src="~/assets/public/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/public/js/jquery.easing.min.js"></script>
+    <script src="~/assets/public/js/scrollspy.min.js"></script>
+    <script src="~/assets/public/js/appear.js"></script>
+    <!-- WOW Animation -->
+    <script src="~/assets/public/js/wow.min.js"></script>
+    <!-- Slick Slider -->
+    <script src="~/assets/public/js/slick.min.js"></script>
+    <!-- Main Js -->
+    <script src="~/assets/public/js/dcode.js"></script>
+    <script type="text/javascript">
+        setTimeout(function () {
+            jQuery('.item.step-1').addClass('active');
+        }, 3000);
+
+    </script>
+</body>
+
+</html>

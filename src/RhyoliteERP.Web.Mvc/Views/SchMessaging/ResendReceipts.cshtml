@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Messaging | Resend Receipts";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Messaging</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ResendReceipts","SchSetups")"> Resend Receipts </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Resend Receipts </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+
+                    <div class="row">
+
+                        <div class="col-sm-2"> </div>
+
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <label> <strong> Class: </strong>  </label>
+                                <select class="form-control mb-3" v-model="selectedClassId" v-on:change="getStudents()">
+                                    <option value="">Select Class</option>
+                                    <option :value="schClass.id" v-for="schClass in classList"> {{schClass.className}} </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+                                <label> <strong> Student: </strong>  </label>
+                                <select class="form-control mb-3" v-model="selectedStudentId">
+                                    <option value="">Select Student</option>
+                                    <option :value="student.id" v-for="student in studentList">{{student.firstName}} {{student.lastName}} ({{student.studentIdentifier}})</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col"> Date</th>
+                                <th scope="col"> Invoice Amount </th>
+                                <th scope="col"> Payment Amount </th>
+                                <th scope="col"> Balance </th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr v-for="(statement,index) in statementList" :key="index">
+                                <td>{{statement.activityDate}}</td>
+                                <td>{{statement.invoice}}</td>
+                                <td>{{statement.payment}}</td>
+                                <td>{{statement.balance}}</td>
+                                <td style="width: 600px;">{{statement.description}}</td>
+                                
+                                <td class="row-actions">
+                                    <a href="#" v-if="statement.transactionType == 2" v-on:click="initSendReceipt(statement)">
+                                        <i class="os-icon os-icon-mail-18"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/school-manager/messaging/resend-receipts.js" asp-append-version="true"></script>

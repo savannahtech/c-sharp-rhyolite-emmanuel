@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Bill Templates";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Setups</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("BillTemplate","SchSetups")"> Bill Templates </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Bill Template </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <form asp-controller="SchSetups" asp-action="UploadReportTemplate" enctype="multipart/form-data" method="post">
+
+                        <div class="row">
+
+                             <div class="col-sm-3"> </div>
+
+                            <div class="col-sm-3 text-center">
+
+                                <div class="form-group">
+                                    <label> <strong> Choose File: </strong> </label>
+                                    <input type="file" name="htmlFile" class="form-control" required v-on:change="handleFileUpload($event)">
+                                </div>
+
+                                <input type="hidden" name="reportType" value="bill" />
+
+                            </div>
+
+
+                            <div class="col-sm-1">
+
+                                <div class="form-group">
+                                    <br />
+                                    <button type="submit" value="Upload" id="uploadBtn" :disabled="!fileInput" class="alignright btn btn-primary mt-2"> Import </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    <hr />
+                    <div class="pt-0 px-2">
+
+                        <iframe src="http://localhost:5200/report-templates/student-bill-standard.html" height="500" width="1000" frameBorder="0"></iframe>
+                </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+<script src="~/js/school-manager/setups/bill-template.js" asp-append-version="true"></script>

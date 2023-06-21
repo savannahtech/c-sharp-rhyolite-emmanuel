@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Employee Days Worked";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Data Entry </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("EmployeeDaysWorked","PayrollDataEntry")"> Employee Days Worked </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Employee Days Worked </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-2"></div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label> Month: </label>
+
+                                <select class="form-control mb-3" v-model="month">
+                                    <option value="1"> January </option>
+                                    <option value="2"> February </option>
+                                    <option value="3"> March </option>
+                                    <option value="4"> April </option>
+                                    <option value="5"> May </option>
+                                    <option value="6"> June </option>
+                                    <option value="7"> July </option>
+                                    <option value="8"> August </option>
+                                    <option value="9"> September </option>
+                                    <option value="10"> October </option>
+                                    <option value="11"> November </option>
+                                    <option value="12"> December </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <label>  Year: </label>
+                                <input type="number" class="form-control" v-model="year" placeholder="@DateTime.Now.Year">
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <label>  Salary Type: </label>
+
+                                <select class="form-control" v-model="salaryType" ref="salaryType">
+                                    <option> Salaried </option>
+                                    <option> Hourly </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <hr />
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+ 
+
+<script src="~/js/payroll/data-entry/employee-days-worked.js" asp-append-version="true"></script>

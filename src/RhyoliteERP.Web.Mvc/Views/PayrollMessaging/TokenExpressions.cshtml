@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Messaging | Token Expressions";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Messaging </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("TokenExpressions","PayrollMessaging")"> Token Expressions </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Messaging </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Expression</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col"> </th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr v-for="(token,index) in tokenExpressionList" :key="index">
+                                    <th scope="row">{{token.id}}</th>
+                                    <td>{{token.expression}}</td>
+                                    <td>{{token.description}}</td>
+                                    <td>
+                                        <a href="#" @@click.prevent="copyToken(token.expression)" class="text-decoration-none small px-3 text-primary">
+                                            <i class="fa fa-copy me-1">
+                                            </i>
+                                            Copy to Clipboard
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/payroll/messaging/token-expressions.js" asp-append-version="true"></script>

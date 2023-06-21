@@ -1,0 +1,65 @@
+﻿@using Abp.Authorization.Users
+@using Abp.Web.Security.AntiForgery
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@model RhyoliteERP.Web.Models.Account.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    AbpAntiForgeryManager.SetCookie(Context);
+    Layout = "~/Views/Account/_authLayout.cshtml";
+}
+
+
+<div class="all-wrapper menu-side with-pattern" id="app">
+    <div class="auth-box-w wider">
+        <div class="logo-w"><a href="#"><img alt="" style="width:180px" src="~/assets/admin/img/r-logo.png"></a></div>
+        <h4 class="auth-header">Create New Rhyolite Account</h4>
+        <form>
+            
+            <div class="form-group">
+                <label for=""> <strong> Business Name: </strong>  </label>
+                <input class="form-control" v-model="businessName" ref="businessName" placeholder="Business Name" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for=""> <strong> Contact Number: </strong>  </label>
+                <input class="form-control" v-model="primaryPhone" ref="primaryPhone" placeholder="Contact Number" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for=""> <strong> Email Address: </strong>  </label>
+                <input class="form-control" v-model="primaryEmail" ref="primaryEmail" placeholder="Email" type="email">
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""> <strong> City: </strong>  </label>
+                        <input class="form-control" v-model="city" ref="city" placeholder="City" type="text">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group"><label for=""> <strong> Location or Address: </strong>  </label>
+                        <input class="form-control" v-model="locationOrAddress" ref="locationOrAddress" placeholder="Location or Address" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons-w">
+                <button type="button" v-on:click="register()" :disabled="isLoading" class="btn btn-primary">
+                    
+                    Register Now
+                    <div class="spinner-border" v-if="isLoading" role="status" aria-hidden="true" style="width: 20px; height: 20px"></div>
+                </button>
+             </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="~/libs/toastr/toastr.min.js" asp-append-version="true"></script>
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+ 
+<script src="~/js/account/register.js" asp-append-version="true"></script>

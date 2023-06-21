@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "Create/Update";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Staff</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Staff")"> Create/Update </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Create/Update </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+
+                    <fieldset class="form-group">
+                        <legend><span> Search </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <strong> Search Staff: </strong>  </label>
+
+                                    <select class="form-control mb-3" v-show="!staffListControllInitialized" v-model="selectedStaffId">
+                                        <option value=""> Select Staff </option>
+                                    </select>
+
+                                    <input id="staffIdQuery" v-show="staffList.length > 0 && staffListControllInitialized" v-model="selectedStaffId" type="text" class="form-control" />
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </fieldset>
+                    
+                    <hr />
+                    <form id="stfForm">
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+
+                                <img src="https://res.cloudinary.com/rhyoliteprime/image/upload/v1533814738/images_6.png" class="height-150" style="width:150px" alt="member_info" id="stfImage" name="stfImage">
+                                <br /> <br />
+                                <div class="custom-file col-md-10">
+                                    <input type="file" class="custom-file-input col-md-12" id="inputGroupFile01" name="myfile" onchange="previewImage(event)">
+                                    <label class="custom-file-label col-md-12" for="inputGroupFile01">Choose Image</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> Staff ID: <font color="red">*</font> &nbsp; <a style="color:#3498DB;" v-on:click="generateStaffIdentifier()"><b> Generate </b></a> </label>
+                                    <input type="text" class="form-control" v-model="staffIdentifier" ref="staffIdentifier" placeholder="StaffID">
+                                    <span class="text-danger" v-if="!$v.staffIdentifier.required && $v.staffIdentifier.$dirty && staffIdentifier == ''"> Staff ID field is required </span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> First Name: <font color="red">*</font></label>
+                                    <input v-model="firstName" ref="firstName" type="text" class="form-control" placeholder="First Name" />
+                                    <span class="text-danger" v-if="!$v.firstName.required && $v.firstName.$dirty && firstName == ''"> First name field is required </span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Date of Birth: </label>
+                                    <input type="date" ref="dateOfBirth" class="form-control" v-model="dateOfBirth">
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> Date Employed: </label>
+                                    <input type="date" ref="dateEmployed" class="form-control" v-model="dateEmployed">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> SSN: </label>
+                                    <input v-model="ssn" ref="ssn" type="text" class="form-control" placeholder="Social Security Number" />
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Primary Phone:<font color="red">*</font> </label>
+                                    <input v-model="primaryPhone" ref="primaryPhone" type="text" class="form-control" placeholder="Primary Phone #" />
+                                    <span class="text-danger" v-if="!$v.primaryPhone.required && $v.primaryPhone.$dirty && primaryPhone == ''"> Primary Phone No.# field is required </span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Emergency Contact Person: </label>
+                                    <input v-model="emergencyContactPerson" ref="emergencyContactPerson" type="text" class="form-control" placeholder="Emergency Contact Person" />
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Email:   </label>
+                                    <input v-model="emailAddress" ref="emailAddress" type="text" class="form-control" placeholder="Email Address" />
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Home Address: </label>
+                                    <textarea class="form-control" placeholder="Home Address" v-model="homeAddress" ref="homeAddress"></textarea>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> Last Name: <font color="red">*</font></label>
+                                    <input type="text" class="form-control" v-model="lastName" ref="lastName" placeholder="Last Name">
+                                    <span class="text-danger" v-if="!$v.lastName.required && $v.lastName.$dirty && lastName == ''"> Last name field is required </span>
+
+
+                                </div>
+                                <div class="form-group">
+                                    <label> Middle Name(s): </label>
+                                    <input type="text" class="form-control" v-model="otherName" href="otherName" placeholder="Other Name(s)">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Nationality: </label>
+                                    <select class="form-control mb-3" v-model="nationalityId" ref="nationalityId">
+                                        <option value="">Select Nationality</option>
+                                        <option :value="country.id" v-for="country in nationalityList">{{country.nationality}}</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> Gender: <font color="red">*</font></label>
+                                    <select class="form-control" v-model="gender" ref="gender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> Staff Status: <font color="red">*</font> </label>
+                                    <select class="form-control mb-3" v-model="staffStatusId" ref="staffStatusId">
+                                        <option value="">Select Status</option>
+                                        <option :value="staffStatus.id" v-for="staffStatus in staffStatusList">{{staffStatus.name}}</option>
+                                    </select>
+                                    <span class="text-danger" v-if="!$v.staffStatusId.required && $v.staffStatusId.$dirty"> Staff Status field is required </span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Marrital Status: <font color="red">*</font> </label>
+                                    <select class="form-control" v-model="maritalStatus" ref="maritalStatus">
+                                        <option>Single</option>
+                                        <option>Married</option>
+                                        <option>Divorced</option>
+                                        <option>Widowed</option>
+                                        <option>Married But Separated</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Secondary Phone:  </label>
+                                    <input type="text" class="form-control" v-model="secondaryPhone" ref="secondaryPhone" placeholder="Secondary Phone">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Emergency Contact Person No#: </label>
+                                    <input type="text" class="form-control" v-model="emergencyContactPhone" ref="emergencyContactPhone" placeholder="Emergency Contact Person #">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> City/Location: </label>
+                                    <textarea class="form-control" placeholder="Enter City/Location: Address" v-model="cityOrLocation" ref="cityOrLocation"></textarea>
+                                    <span class="text-danger" v-if="!$v.cityOrLocation.required && $v.cityOrLocation.$dirty && cityOrLocation == ''">  City/Location field is required </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </form>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-7"></div>
+                        <div class="col-sm-4">
+
+                            <button type="button" v-on:click="saveStaff()" :disabled="isLoading" class="btn btn-primary" style="float: right;">
+                                Save
+                                <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/school-manager/staff/create-or-update.js" asp-append-version="true"></script>

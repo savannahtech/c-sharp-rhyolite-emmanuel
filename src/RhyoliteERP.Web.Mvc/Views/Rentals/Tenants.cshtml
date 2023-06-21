@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Tenants";
+    Layout = "~/Views/Shared/Layout/_adminRentalLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Rentals </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Tenants","Rentals")"> Tenants </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Tenants </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/property-rental/rentals/tenants.js" asp-append-version="true"></script>

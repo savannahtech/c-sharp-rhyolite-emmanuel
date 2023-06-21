@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Messaging | Templates";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Messaging</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Templates","Messaging")"> Templates </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Templates </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+
+                    <button type="button" v-on:click="resetModal()" class="btn btn-primary mb-2" data-target="#addMessageTemplate" data-toggle="modal" style="float: right">
+                        Add Template
+                    </button>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Alias</th>
+                                <th scope="col">Subject</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(template,index) in smsTemplateList" :key="index">
+                                <td>{{template.alias}}</td>
+                                <td>{{template.messageSubject}}</td>
+                                <td style="width: 600px;">{{template.messageContent}}</td>
+
+                                <td class="row-actions">
+                                    <a href="#" v-on:click="initUpdate(template)">
+                                        <i class="os-icon os-icon-ui-49"></i>
+                                    </a>
+                                    <a class="danger" href="#" v-on:click="delTemplate(template.id)"><i class="os-icon os-icon-ui-15"></i></a>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <hr />
+                    <div class="controls-below-table">
+                        <div class="table-records-info"> Showing records {{lowerBound}} - {{upperBound}}</div>
+                        <div class="table-records-pages">
+                            <ul>
+                                <li><a class="" :class="{current: pageNo === page}" v-for="page in pageList" :key="page" href="#" @@click.prevent="onPageChanged(page)">{{ page }}</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="addMessageTemplate" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenteredScrollableTitle"> {{modalTitle}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label>  Alias: </label>
+                            <input type="text" class="form-control" v-model="alias" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>  Subject: </label>
+                            <input type="text" class="form-control" v-model="messageSubject" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>  Message Content: </label>
+                            <textarea placeholder="Hello..." rows="3" class="form-control" v-model="messageContent"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" v-on:click="saveTemplate()">
+                            Save
+
+                            <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/school-manager/messaging/messsage-templates.js" asp-append-version="true"></script>
+

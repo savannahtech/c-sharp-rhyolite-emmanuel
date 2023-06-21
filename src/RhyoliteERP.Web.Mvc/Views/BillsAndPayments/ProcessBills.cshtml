@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Bills & Payments | Process Bills";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Process Bills</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ProcessBills","BillsAndPayments")"> Process Bills </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Process Bills </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <form id="pbForm">
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong> Academic Year: </strong>  </label>
+                                    <select class="form-control mb-3" v-model="selectedAcademicYearId" v-on:change="getBill()">
+                                        <option value="">Select Academic Year</option>
+                                        <option :value="academicYear.id" v-for="academicYear in academicYearList"> {{academicYear.name}} </option>
+                                    </select>
+                                    <span class="text-danger" v-if="!$v.selectedAcademicYearId.required && $v.selectedAcademicYearId.$dirty"> Academic Year field is required </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label> <strong> Term: </strong>  </label>
+                                    <select class="form-control mb-3" v-model="selectedTermId" v-on:change="getBill()">
+                                        <option value="">Select Term </option>
+                                        <option :value="term.id" v-for="term in termList"> {{term.name}} </option>
+                                    </select>
+                                    <span class="text-danger" v-if="!$v.selectedTermId.required && $v.selectedTermId.$dirty"> Term field is required </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong> Class: </strong>  </label>
+                                    <select class="form-control mb-3" v-model="selectedClassId" v-on:change="getBill()">
+                                        <option value="">Select Class</option>
+                                        <option :value="schClass.id" v-for="schClass in classList"> {{schClass.className}} </option>
+                                    </select>
+
+                                    <span class="text-danger" v-if="!$v.selectedClassId.required && $v.selectedClassId.$dirty"> Class field is required </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong> Bill Types: </strong>  </label>
+                                    <select class="form-control mb-3" v-model="selectedBillTypeId" v-on:change="getBill()">
+                                        <option value=""> Select Bill Type </option>
+                                        <option :value="billType.id" v-for="billType in billTypeList"> {{billType.name}} </option>
+                                    </select>
+                                    <span class="text-danger" v-if="!$v.selectedBillTypeId.required && $v.selectedBillTypeId.$dirty"> Bill type field is required </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+
+                            <div class="col-sm-2"></div>
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong> Bill No: </strong>  <a style="color:#3498DB;" v-on:click="generateBillNo()"><b> Generate </b></a> </label>
+                                    <input v-model="billNo" ref="billNo" type="text" class="form-control" />
+                                    <span class="text-danger" v-if="!$v.billNo.required && $v.billNo.$dirty"> Bill No# field is required </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label> <strong>Bill Date: </strong>  </label>
+                                    <input v-model="billDate" ref="billDate" type="date" class="form-control" />
+                                    <span class="text-danger" v-if="!$v.billDate.required && $v.billDate.$dirty"> Bill date field is required </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <br />
+                                    <button type="button" v-on:click="generateBills()" :disabled="isLoading" class="alignright btn btn-primary mt-2">
+                                        Generate
+                                        <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </form>
+
+                    <hr />
+
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <ul class="nav nav-pills nav-fill" role="tablist" id="processBillTab">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="fees-tab" data-toggle="tab" role="tab" aria-controls="fees" aria-selected="true" href="#fees">Fees</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="fees-tab" data-toggle="tab" role="tab" aria-controls="fees" aria-selected="true" href="#students"> Students </a>
+                                </li>
+
+                            </ul>
+                            <br />
+                            <hr />
+
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="fees" role="tabpanel" aria-labelledby="fees-tab">
+
+                                    <div class="row">
+
+                                        <div class="col-sm-12">
+                                            <div id="billsTable"></div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="students" role="tabpanel" aria-labelledby="students-tab">
+
+                                    <div class="row">
+
+                                        <div class="col-sm-12">
+                                            <div id="studentsTable"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/school-manager/billspayment/process-bills.js" asp-append-version="true"></script>

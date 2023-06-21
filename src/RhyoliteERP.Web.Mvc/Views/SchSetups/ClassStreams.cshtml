@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Class Streams";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Setups </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ClassStreams","SchSetups")"> Class Streams </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Class Streams </h6>
+            <div class="element-box">
+
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <div id="dataTable"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/school-manager/setups/class-streams.js" asp-append-version="true"></script>

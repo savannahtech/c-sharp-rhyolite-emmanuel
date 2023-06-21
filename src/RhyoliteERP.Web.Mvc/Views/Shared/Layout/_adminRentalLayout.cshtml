@@ -1,0 +1,732 @@
+﻿@using Abp.Configuration.Startup
+@using Abp.Web.Mvc.Alerts
+@using Abp.Web.Security.AntiForgery
+@using RhyoliteERP.Web.Resources
+@using Microsoft.Extensions.Configuration
+@using RhyoliteERP.Web.Views.Shared.Components.RhyoliteSideBarUserArea;
+@using RhyoliteERP.Web.Views.Shared.Components.RhyoliteUserArea
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@inject IMultiTenancyConfig MultiTenancyConfig
+@inject IWebResourceManager WebResourceManager
+@inject IAlertManager AlertManager
+@inject IConfiguration Configuration
+@inject ILanguageManager LanguageManager
+@{
+    AbpAntiForgeryManager.SetCookie(Context);
+    string reportApiBaseUrl = Configuration["ReportingApi:EndPoint"];
+    string siteBaseUrl = Configuration["SiteBaseUrl"];
+    var pageTitle = !string.IsNullOrWhiteSpace(ViewBag.Title) ? ViewBag.Title + " | " : "";
+    pageTitle += "RhyoliteERP";
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title> @pageTitle </title>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="template language" name="keywords">
+    <meta content="RhyolitePrime" name="author">
+    <meta content="RhyoliteERP" name="description">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <link href="https://res.cloudinary.com/rhyoliteprime/image/upload/v1677481688/rhyolite/favicon.ico" rel="shortcut icon">
+    <link href="https://res.cloudinary.com/rhyoliteprime/image/upload/v1677481762/rhyolite/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <environment names="Development">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    </environment>
+    <environment names="Production">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    </environment>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script src="~/libs/axios/axios.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+    <link href="~/assets/admin/ejthemes/office-365/ej.web.all.min.css" rel="stylesheet" />
+        <link href="~/libs/toastr/toastr.css" rel="stylesheet" />
+
+     <script src="~/assets/admin/bower_components/jquery/dist/jquery.min.js"></script>
+
+     <script src="~/scripts/jsrender.min.js"></script>
+      <script src="~/scripts/ej.web.all.min.js" type="text/javascript"></script>
+      <link href="~/assets/admin/css/controls.css" asp-append-version="true" rel="stylesheet" />
+
+        <!-- Report Viewer component script -->
+        <script src="~/js/bold.report-viewer.min.js"></script>
+
+        <script src="~/libs/moment/moment.js"></script>
+
+    <link href="~/assets/admin/bower_components/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="~/assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="~/assets/admin/bower_components/dropzone/dist/dropzone.css" rel="stylesheet">
+    <link href="~/assets/admin/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="~/assets/admin/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="~/assets/admin/bower_components/slick-carousel/slick/slick.css" rel="stylesheet">
+    <link href="~/assets/admin/css/main.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+        var reportApiBaseUrl = "@reportApiBaseUrl";
+        var siteBaseUrl = "@siteBaseUrl";
+
+    </script>
+
+</head>
+<body class="menu-position-side menu-side-left full-screen with-content-panel">
+    <div class="all-wrapper with-side-panel solid-bg-all">
+        
+        <div class="search-with-suggestions-w">
+            <div class="search-with-suggestions-modal">
+                <div class="element-search">
+                    <input class="search-suggest-input" placeholder="Start typing to search...">
+                    <div class="close-search-suggestions"><i class="os-icon os-icon-x"></i></div>
+                </div>
+                <div class="search-suggestions-group">
+                    <div class="ssg-header">
+                        <div class="ssg-icon">
+                            <div class="os-icon os-icon-box"></div>
+                        </div>
+                        <div class="ssg-name">Projects</div>
+                        <div class="ssg-info">24 Total</div>
+                    </div>
+                    <div class="ssg-content">
+                        <div class="ssg-items ssg-items-boxed">
+                            <a class="ssg-item" href="users_profile_big.html">
+                                <div class="item-media" style="background-image: url(/assets/admin/img/company6.png)"></div>
+                                <div class="item-name">Integ<span>ration</span> with API</div>
+                            </a>
+                            <a class="ssg-item" href="users_profile_big.html">
+                                <div class="item-media" style="background-image: url(/assets/admin/img/company7.png)"></div>
+                                <div class="item-name">Deve<span>lopm</span>ent Project</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-suggestions-group">
+                    <div class="ssg-header">
+                        <div class="ssg-icon">
+                            <div class="os-icon os-icon-users"></div>
+                        </div>
+                        <div class="ssg-name">Customers</div>
+                        <div class="ssg-info">12 Total</div>
+                    </div>
+                    <div class="ssg-content">
+                        <div class="ssg-items ssg-items-list">
+                            <a class="ssg-item" href="users_profile_big.html">
+                                <div class="item-media" style="background-image: url(/assets/admin/img/avatar1.jpg)"></div>
+                                <div class="item-name">John Ma<span>yer</span>s</div>
+                            </a>
+                            <a class="ssg-item" href="users_profile_big.html">
+                                <div class="item-media" style="background-image: url(/assets/admin/img/avatar2.jpg)"></div>
+                                <div class="item-name">Th<span>omas</span> Mullier</div>
+                            </a>
+                            <a class="ssg-item" href="users_profile_big.html">
+                                <div class="item-media" style="background-image: url(/assets/admin/img/avatar3.jpg)"></div>
+                                <div class="item-name">Kim C<span>olli</span>ns</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-suggestions-group">
+                    <div class="ssg-header">
+                        <div class="ssg-icon">
+                            <div class="os-icon os-icon-folder"></div>
+                        </div>
+                        <div class="ssg-name">Files</div>
+                        <div class="ssg-info">17 Total</div>
+                    </div>
+                    <div class="ssg-content">
+                        <div class="ssg-items ssg-items-blocks">
+                            <a class="ssg-item" href="#">
+                                <div class="item-icon"><i class="os-icon os-icon-file-text"></i></div>
+                                <div class="item-name">Work<span>Not</span>e.txt</div>
+                            </a>
+                            <a class="ssg-item" href="#">
+                                <div class="item-icon"><i class="os-icon os-icon-film"></i></div>
+                                <div class="item-name">V<span>ideo</span>.avi</div>
+                            </a>
+                            <a class="ssg-item" href="#">
+                                <div class="item-icon"><i class="os-icon os-icon-database"></i></div>
+                                <div class="item-name">User<span>Tabl</span>e.sql</div>
+                            </a>
+                            <a class="ssg-item" href="#">
+                                <div class="item-icon"><i class="os-icon os-icon-image"></i></div>
+                                <div class="item-name">wed<span>din</span>g.jpg</div>
+                            </a>
+                        </div>
+                        <div class="ssg-nothing-found">
+                            <div class="icon-w"><i class="os-icon os-icon-eye-off"></i></div>
+                            <span>No files were found. Try changing your query...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layout-w">
+
+            <div class="menu-mobile menu-activated-on-click color-scheme-dark">
+                <div class="mm-logo-buttons-w">
+                    <a class="mm-logo" href="#"><img style="width :180px" src="~/assets/admin/img/r-logo.png"><span>   </span></a>
+                    <div class="mm-buttons">
+                        <div class="content-panel-open">
+                            <div class="os-icon os-icon-grid-circles"></div>
+                        </div>
+                        <div class="mobile-menu-trigger">
+                            <div class="os-icon os-icon-hamburger-menu-1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-and-user">
+                    <div class="logged-user-w">
+                        <div class="avatar-w"><img alt="" src="https://res.cloudinary.com/rhyoliteprime/image/upload/v1533814738/images_6.png"></div>
+                        <div class="logged-user-info-w">
+                            <div class="logged-user-name">Maria Gomez</div>
+                            <div class="logged-user-role">Administrator</div>
+                        </div>
+                    </div>
+                    <ul class="main-menu">
+
+                        <li class="selected">
+
+                            <a href="@Url.Action("PropertyRental","Dashboard")">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-layout"></div>
+                                </div>
+                                <span>Dashboard</span>
+                            </a>
+
+                        </li>
+                       
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-layers"></div>
+                                </div>
+                                <span> Shared Resource </span>
+                            </a>
+                            <ul class="sub-menu">
+
+                                <li><a href="@Url.Action("CompanyProfile","RentalSharedResource")"> Company Profile  </a></li>
+                                <li><a href="@Url.Action("Departments","RentalSharedResource")"> Departments </a></li>
+                                <li><a href="@Url.Action("Currencies","RentalSharedResource")"> Currencies &amp; Rates </a></li>
+                                <li><a href="@Url.Action("BanksBranches","RentalSharedResource")">  Banks &amp; Branches </a></li>
+                                <li><a href="@Url.Action("Nationalities","RentalSharedResource")">  Countries/Nationality </a></li>
+                                <li><a href="@Url.Action("CustomerGroups","RentalSharedResource")"> Customer Groups </a></li>
+
+                                <li><a href="@Url.Action("CostCenters","RentalSharedResource")"> Cost Centers </a></li>
+                                @*<li><a href="@Url.Action("Customers","RentalSharedResource")"> Customers </a></li>*@
+                                <li><a href="@Url.Action("Religions","RentalSharedResource")"> Religions </a></li>
+                                <li><a href="@Url.Action("Relationships","RentalSharedResource")"> Relationships </a></li>
+                                <li><a href="@Url.Action("SystemNumbers","RentalSharedResource")"> System Numbers </a></li>
+                                <li><a href="@Url.Action("SupplierGroups","RentalSharedResource")"> Supplier Groups  </a></li>
+                                @*<li><a href="@Url.Action("Suppliers","RentalSharedResource")"> Suppliers </a></li>*@
+
+                            </ul>
+                            
+                        </li>
+
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-package"></div>
+                                </div>
+                                <span> Setups </span>
+                            </a>
+                            <ul class="sub-menu">
+                                
+                                <li><a href="@Url.Action("PropertyTypes","RentalSetups")"> Property Types </a></li>
+                                <li><a href="@Url.Action("MeterTypes","RentalSetups")"> Meter Types </a></li>
+                                <li><a href="@Url.Action("NotificationSettings","RentalSetups")"> Notification Settings </a></li>
+                                
+                            </ul>
+                        </li>
+
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-file-text"></div>
+                                </div>
+                                <span> Rentals </span>
+                            </a>
+                            <ul class="sub-menu">
+
+                                <li><a href="@Url.Action("Properties","Rentals")"> Properties </a></li>
+                                <li><a href="@Url.Action("RentRoll","Rentals")"> Rent Roll </a></li>
+                                <li><a href="@Url.Action("Tenants","Rentals")"> Tenants </a></li>
+                                <li><a href="@Url.Action("RentalOwners","Rentals")"> Rental Owners </a></li>
+                                <li><a href="@Url.Action("OutstandingBalances","Rentals")">  Outstanding Balances </a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-ui-93"></div>
+                                </div>
+                                <span> Leasing </span>
+                            </a>
+                            <ul class="sub-menu">
+
+                                <li><a href="@Url.Action("Index","Leasing")">  Listings </a></li>
+                                <li><a href="@Url.Action("Applicants","Leasing")"> Applicants </a></li>
+                                <li><a href="@Url.Action("DraftLeases","Leasing")"> Draft Leases </a></li>
+                                <li><a href="@Url.Action("LeaseRenewal","Leasing")"> Lease Renewal </a></li>
+
+                            </ul>
+                        </li>
+                         
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-mail"> </div>
+                                </div>
+                                <span>Messaging </span>
+                            </a>
+                            <ul class="sub-menu">
+
+                                <li><a href="@Url.Action("Parent","RentalMessaging")"> Compose Message </a></li>
+                                <li><a href="@Url.Action("Templates","RentalMessaging")"> Templates </a></li>
+                                <li><a href="@Url.Action("TokenExpressions","RentalMessaging")"> Token Expressions </a></li>
+                                <li><a href="@Url.Action("PersonalizedMessages","SchMessaging")"> Personalized Messages </a></li>
+                                <li><a href="@Url.Action("Reports","SchMessaging")"> Reports </a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-file-plus"></div>
+                                </div>
+                                <span> Maintenance </span>
+                            </a>
+                            <ul class="sub-menu">
+
+                                <li><a href="@Url.Action("Vendors","RentalMaintenance")"> Vendors </a></li>
+                                <li><a href="@Url.Action("WorkOrders","RentalMaintenance")"> Work Orders </a></li>
+                                <li><a href="@Url.Action("PropertyInspections","RentalMaintenance")"> Property Inspections </a></li>
+                            
+                            </ul>
+                        </li>
+                        
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-grid"></div>
+                                </div>
+                                <span> G/L </span>
+                            </a>
+                            <ul class="sub-menu">
+
+                                 <li><a href="@Url.Action("ProcessBills","RentalLedger")"> Default G/L Numbers </a></li>
+                                <li><a href="@Url.Action("ViewBills","RentalLedger")"> Rental Transactions  </a></li>
+                            
+                            </ul>
+                        </li>
+
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-zap"></div>
+                                </div>
+                                <span> Enquiries </span>
+                            </a>
+                            <ul class="sub-menu">
+
+                                <li><a href="@Url.Action("Payments","RentalEnquiries")"> Payments  </a></li>
+                                <li><a href="@Url.Action("StudentsByClass","RentalEnquiries")"> Resident Center Usage  </a></li>
+                                <li><a href="@Url.Action("StudentsByNationality","RentalEnquiries")"> Maintenance </a></li>
+                                <li><a href="@Url.Action("StudentsByReligion","RentalEnquiries")"> Expenses </a></li>
+                                <li><a href="@Url.Action("StudentBalances","RentalEnquiries")"> Leasing Perfomance </a></li>
+                                <li><a href="@Url.Action("StudentPayments","RentalEnquiries")"> Company Revenue</a></li>
+                                <li><a href="@Url.Action("OutstandingBalances","RentalEnquiries")"> Outstanding Balances </a></li>
+                                <li><a href="@Url.Action("ExpiringLeases","RentalEnquiries")"> Expiring Leases  </a></li>
+                                <li><a href="@Url.Action("OverdueTasks","RentalEnquiries")"> Overdue Tasks  </a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                   <div class="os-icon os-icon-file-text"></div>
+                                </div>
+                                <span> Reports </span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="@Url.Action("Payments","RentalReports")"> Payments  </a></li>
+                                <li><a href="@Url.Action("StudentsByClass","RentalReports")"> Resident Center Usage  </a></li>
+                                <li><a href="@Url.Action("StudentsByNationality","RentalReports")"> Maintenance </a></li>
+                                <li><a href="@Url.Action("StudentsByReligion","RentalReports")"> Expenses </a></li>
+                                <li><a href="@Url.Action("StudentBalances","RentalReports")"> Leasing Perfomance </a></li>
+                                <li><a href="@Url.Action("StudentPayments","RentalReports")"> Company Revenue</a></li>
+                                <li><a href="@Url.Action("OutstandingBalances","RentalReports")"> Outstanding Balances </a></li>
+                                <li><a href="@Url.Action("ExpiringLeases","RentalReports")"> Expiring Leases  </a></li>
+                                <li><a href="@Url.Action("OverdueTasks","RentalReports")"> Overdue Tasks  </a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    
+                </div>
+            </div>
+            
+            <div class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
+                <div class="logo-w">
+                    <a class="logo" href="#">
+                        <div class="">
+                            <img alt="" style="width:180px" src="~/assets/admin/img/r-logo.png">
+                        </div>
+                        
+                    </a>
+                </div>
+                <div class="logged-user-w avatar-inline">
+                    @await Component.InvokeAsync(typeof(RhyoliteSideBarUserAreaViewComponent))
+                </div>
+                 
+                <h1 class="menu-page-header">Page Header</h1>
+                <ul class="main-menu">
+                    <li class="selected">
+                        <a href="@Url.Action("PropertyRental","Dashboard")">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layout"></div>
+                            </div>
+                            <span>Dashboard</span>
+                        </a>
+                        
+                    </li>
+
+                    <li class="sub-header"><span>Setups</span></li>
+
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layers"></div>
+                            </div>
+                            <span> Shared Resource </span>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header"> Shared Resource  </div>
+                            <div class="sub-menu-icon"> <i class="os-icon os-icon-layers"></i> </div>
+                            <div class="sub-menu-i">
+
+                                <ul class="sub-menu">
+                                    <li><a href="@Url.Action("CompanyProfile","RentalSharedResource")"> Business Profile  </a></li>
+                                    <li><a href="@Url.Action("Departments","RentalSharedResource")"> Departments </a></li>
+                                    <li><a href="@Url.Action("Currencies","RentalSharedResource")"> Currencies &amp; Rates </a></li>
+                                    <li><a href="@Url.Action("BanksBranches","RentalSharedResource")"> Banks &amp; Branches </a></li>
+                                    <li><a href="@Url.Action("Nationalities","RentalSharedResource")"> Countries/Nationality </a></li>
+                                    <li><a href="@Url.Action("CustomerGroups","RentalSharedResource")"> Customer Groups </a></li>
+                                </ul>
+
+                                <ul class="sub-menu">
+                                    <li><a href="@Url.Action("CostCenters","RentalSharedResource")"> Cost Centers </a></li>
+                                    @*<li><a href="@Url.Action("Customers","RentalSharedResource")"> Customers </a></li>*@
+                                    <li><a href="@Url.Action("Religions","RentalSharedResource")"> Religions </a></li>
+                                    <li><a href="@Url.Action("Relationships","RentalSharedResource")"> Relationships </a></li>
+                                    <li><a href="@Url.Action("SystemNumbers","RentalSharedResource")"> System Numbers </a></li>
+                                    <li><a href="@Url.Action("SupplierGroups","RentalSharedResource")"> Supplier Groups  </a></li>
+                                    @*<li><a href="@Url.Action("Suppliers","RentalSharedResource")"> Suppliers </a></li>*@
+                                </ul>
+                                 
+                            </div>
+                        </div>
+                    </li>
+                   
+                   <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-hierarchy-structure-2"></div>
+                            </div>
+                            <span> Setups </span>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header"> Setups </div>
+                            <div class="sub-menu-icon"><i class="os-icon os-hierarchy-structure-2"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("PropertyTypes","RentalSetups")"> Property Types </a></li>
+                                    <li><a href="@Url.Action("PropertyGroups","RentalSetups")"> Property Groups </a></li>
+                                    <li><a href="@Url.Action("MeterTypes","RentalSetups")"> Meter Types </a></li>
+                                    <li><a href="@Url.Action("VendorCategory","RentalSetups")"> Vendor Category </a></li>
+                                    <li><a href="@Url.Action("NotificationSettings","RentalSetups")"> Notification Settings </a></li>
+                                
+                                </ul>
+                                 
+                                 
+                            </div>
+                        </div>
+                    </li> 
+                    
+                     <li class="sub-header"><span> Data Entry </span></li>
+
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-user-plus"></div>
+                            </div>
+                            <span>Rentals </span>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header"> Leasing & Rentals </div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-user-plus"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("RegisterProperty","Rentals")"> Register Property </a></li>
+                                    <li><a href="@Url.Action("PropertyUnits","Rentals")"> Property Units </a></li>
+                                    <li><a href="@Url.Action("LeaseProperty","Rentals")"> Lease/Rent Property  </a></li>
+                                    <li><a href="@Url.Action("LeasePropertyUnit","Rentals")"> Lease/Rent Property Unit  </a></li>
+                                    <li><a href="@Url.Action("Tenants","Rentals")"> Tenants </a></li>
+                                    <li><a href="@Url.Action("UnitListings","Rentals")"> Unit Listings </a></li>
+
+                                </ul>
+
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("Applicants","Rentals")"> Applicant Listings </a></li>
+                                    <li><a href="@Url.Action("RecievePayments","Rentals")"> Recieve Payments </a></li>
+                                    <li><a href="@Url.Action("LeaseRenewal","Rentals")"> Lease Renewal </a></li>
+                                    <li><a href="@Url.Action("CancelLease","Rentals")"> Cancel Lease/Rental </a></li>
+                                    <li><a href="@Url.Action("BidOffers","Rentals")">  Bid Offers </a></li>
+                                    <li><a href="@Url.Action("ScheduledTours","Rentals")">  Scheduled Tours </a></li>
+
+                                    @*<li><a href="@Url.Action("RentalOwners","Rentals")"> Rental Owners </a></li>*@
+                                    @*<li><a href="@Url.Action("MeterReadings","Rentals")"> Meter Readings </a></li>*@
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-file-plus"></div>
+                            </div>
+                            <span> Maintenance </span>
+                        </a>
+
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header"> Maintenance </div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-file-plus"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("Vendors","RentalMaintenance")"> Vendors </a></li>
+                                    <li><a href="@Url.Action("WorkOrders","RentalMaintenance")"> Work Orders </a></li>
+                            
+                                </ul>
+                                  
+                                 
+                            </div>
+                        </div>
+                    
+                    </li>
+                    
+                    
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-file-text"></div>
+                            </div>
+                            <span> G/L </span>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header"> G/L </div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+
+                                   <li><a href="@Url.Action("DefaultGlNumbers","RentalLedger")"> Default G/L Numbers </a></li>
+                                    <li><a href="@Url.Action("RentalTransactions","RentalLedger")"> Rental Transactions  </a></li>
+                                    <li><a href="@Url.Action("LeaseTransactions","RentalLedger")"> Lease Transactions  </a></li>
+                                     
+                                </ul>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="sub-header"><span> Messaging </span></li>
+
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-mail"> </div>
+                            </div>
+                            <span> Messaging </span>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header"> Messaging </div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-mail"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("Tenants","RentalMessaging")"> Compose Message (Tenants) </a></li>
+                                    <li><a href="@Url.Action("Applicants","RentalMessaging")"> Compose Message (Applicants) </a></li>
+                                    <li><a href="@Url.Action("Templates","RentalMessaging")"> Templates </a></li>
+                                    <li><a href="@Url.Action("TokenExpressions","RentalMessaging")"> Token Expressions </a></li>
+                                    <li><a href="@Url.Action("SendFromExcel","RentalMessaging")">  Send From Excel </a></li>
+                                    <li><a href="@Url.Action("Reports","RentalMessaging")"> Reports </a></li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="sub-header"><span> Reporting </span></li>
+                    
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-file-text"></div>
+                            </div>
+                            <span> Enquiries </span>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header"> Enquiries </div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("Payments","RentalReports")"> Leases & Rentals  </a></li>
+                                    <li><a href="@Url.Action("Payments","RentalReports")"> Tenants  </a></li>
+                                    <li><a href="@Url.Action("Payments","RentalReports")"> Payments  </a></li>
+                                    <li><a href="@Url.Action("StudentsByClass","RentalReports")"> Resident Center Usage  </a></li>
+                                    <li><a href="@Url.Action("StudentsByNationality","RentalReports")"> Maintenance </a></li>
+                                    <li><a href="@Url.Action("StudentsByReligion","RentalReports")"> Expenses </a></li>
+                                    <li><a href="@Url.Action("StudentBalances","RentalReports")"> Leasing Perfomance </a></li>
+
+
+                                </ul>
+
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("StudentPayments","RentalReports")"> Revenue </a></li>
+                                    <li><a href="@Url.Action("OutstandingBalances","RentalReports")"> Outstanding Balances </a></li>
+                                    <li><a href="@Url.Action("ExpiringLeases","RentalReports")"> Expiring Leases  </a></li>
+                                    <li><a href="@Url.Action("OverdueTasks","RentalReports")"> Overdue Tasks  </a></li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-file-text"></div>
+                            </div>
+                            <span> Reports </span>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header"> Reports </div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("Payments","RentalReports")"> Payments  </a></li>
+                                    <li><a href="@Url.Action("StudentsByClass","RentalReports")"> Resident Center Usage  </a></li>
+                                    <li><a href="@Url.Action("StudentsByNationality","RentalReports")"> Maintenance </a></li>
+                                    <li><a href="@Url.Action("StudentsByReligion","RentalReports")"> Expenses </a></li>
+                                    <li><a href="@Url.Action("StudentBalances","RentalReports")"> Leasing Perfomance </a></li>
+                                   
+                                     
+                                </ul>
+
+                                 <ul class="sub-menu">
+
+                                    <li><a href="@Url.Action("StudentPayments","RentalReports")"> Company Revenue</a></li>
+                                    <li><a href="@Url.Action("OutstandingBalances","RentalReports")"> Outstanding Balances </a></li>
+                                    <li><a href="@Url.Action("ExpiringLeases","RentalReports")"> Expiring Leases  </a></li>
+                                    <li><a href="@Url.Action("OverdueTasks","RentalReports")"> Overdue Tasks  </a></li>
+                                   
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </li>
+
+                   
+                </ul>
+                
+            </div>
+            
+            <div class="content-w">
+
+                <div class="top-bar color-scheme-transparent">
+                    <div class="top-menu-controls">
+                        @await Component.InvokeAsync(typeof(RhyoliteUserAreaViewComponent))
+                    </div>
+                </div>
+
+                @RenderBody()
+            </div>
+
+        </div>
+        <div class="display-type"></div>
+    </div>
+
+    <environment names="Development,Staging,Production">
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22"></script>
+
+    <script src="~/libs/moment/moment-with-locales.js" asp-append-version="true"></script>
+    <script src="~/libs/toastr/toastr.min.js" asp-append-version="true"></script>
+    <script src="~/libs/sweetalert/sweetalert.min.js" asp-append-version="true"></script>
+
+    <script src="~/assets/admin/bower_components/popper.js/dist/umd/popper.min.js">
+    </script>
+    <script src="~/assets/admin/bower_components/moment/moment.js"></script>
+    <script src="~/assets/admin/bower_components/chart.js/dist/Chart.min.js"></script>
+    
+     <script src="https://res.cloudinary.com/rhyoliteprime/raw/upload/v1649628390/erp-spa-assets/js/apexcharts.js"></script>
+
+    <script src="~/assets/admin/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap-validator/dist/validator.min.js">
+    </script>
+    <script src="~/assets/admin/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/assets/admin/bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+    <script src="~/assets/admin/bower_components/editable-table/mindmup-editabletable.js">
+    </script>
+    <script src="~/assets/admin/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/admin/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="~/assets/admin/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js">
+    </script>
+    <script src="~/assets/admin/bower_components/tether/dist/js/tether.min.js"></script>
+    <script src="~/assets/admin/bower_components/slick-carousel/slick/slick.min.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/util.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/alert.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/button.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/carousel.js">
+    </script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/collapse.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/dropdown.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/modal.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/tab.js"></script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/tooltip.js">
+    </script>
+    <script src="~/assets/admin/bower_components/bootstrap/js/dist/popover.js"></script>
+    <script src="~/assets/admin/js/demo_customizer5739.js?version=4.5.0"></script>
+    <script src="~/assets/admin/js/main.js"></script>
+
+    </environment>
+
+</body>
+</html>

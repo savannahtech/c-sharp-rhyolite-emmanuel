@@ -1,0 +1,233 @@
+﻿@{
+    ViewBag.Title = "Property Units";
+    Layout = "~/Views/Shared/Layout/_adminRentalLayout.cshtml";
+}
+
+ 
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Rentals </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("PropertyUnits","Rentals")"> Property Units </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Property Units </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+
+                    <fieldset class="form-group">
+                        <legend><span> Search </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <strong> Select Property: </strong>  </label>
+                                    <input id="propertyIdQuery" v-model="searchFilter.propertyId" type="text" class="form-control" />
+
+                                </div>
+
+                            </div>
+                            <div class="col-sm-4">
+
+                                <div class="form-group" v-show="propertyUnitList.length > 0">
+                                    <label> <strong> Select Unit: </strong>  </label>
+                                    <input id="propertyUnitId" v-model="searchFilter.propertyUnitId" type="text" class="form-control" />
+
+                                </div>
+
+                                <div class="form-group" v-if="propertyUnitList.length == 0">
+                                    <label> <strong> Select Unit: </strong>  </label>
+
+                                    <select class="form-control mb-3" >
+                                        <option> Select Unit </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+
+                    <fieldset class="form-group">
+                        <legend><span> Add/Update Unit </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <strong> Select Property: </strong>  </label>
+                                    <input id="propertyId" v-model="propertyId" type="text" class="form-control" />
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <strong>  Unit Number : </strong>  </label>
+                                    <input id="unitNo" v-model="unitNo" ref="unitNo" placeholder="Unit Number" type="text" class="form-control" />
+
+                                </div>
+
+                                  <div class="form-group">
+                                    <label> <strong> Number of Rooms: </strong>  </label>
+                                    <input type="number" class="form-control" placeholder="1" v-model="rooms" id="rooms">
+
+                                </div>
+                                <div class="form-group">
+                                    <label> <strong> Description: </strong>  </label>
+                                    <textarea class="form-control" placeholder="Description..." v-model="description"> </textarea>
+                                </div>
+
+                                
+
+                            </div>
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <strong> Market Rent: </strong>  </label>
+                                    <input type="number" id="marketRent" ref="marketRent" v-model="marketRent" class="form-control" placeholder="GHS 3000" />
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> <strong>  Address: </strong>  </label>
+                                    <input type="text" class="form-control" v-model="address" id="address">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <strong> Baths: </strong>  </label>
+                                    <input type="number" class="form-control" v-model="baths" id="baths">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <strong> Size: </strong>  </label>
+                                    <input id="size" v-model="size" ref="size" placeholder="Size" type="text" class="form-control" />
+
+                                </div>
+                                
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <legend> <span> Amenities (Optional) </span> </legend>
+
+                        <div class="row" v-if="amenitiesList.length > 0">
+
+                            <div class="col-sm-3"> </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="row mb-2" v-for="(amenity, index) in amenitiesList" :key="index" style="align-items:center">
+
+                                    <input type="text" class="form-control col-sm-8" :placeholder="amenityPlaceHolderSuggestions[Math.floor(Math.random() * amenityPlaceHolderSuggestions.length)]" v-model="amenity.name">
+
+                                    <i class="os-icon os-icon-cancel-circle mx-2" v-on:click="removeAmenity(index)"></i>
+
+                                </div>
+                               
+
+                            </div>
+
+
+                            
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-4">
+
+                                <a href="#" @@click.prevent="addAmenities()" role="button" class="display--inline-block margin-bottom--std"><span class="icon--18 icon-add icon--v-middle" aria-hidden="true"></span> <span bd-i18n="Rentals.RentRoll.AddLeaseForm.Button.AddTenantCosigner"> Add Amenities </span></a>
+
+                            </div>
+
+                            <div class="col-sm-4"></div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="form-group" v-if="!propertyUnitId">
+                        <legend><span> Automate Unit Registration </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                            </div>
+
+                            <div class="col-sm-3">
+
+                               
+                                 <div class="form-group">
+                                    <label class="checkbox checkbox-secondary mt-3">
+                                        <input type="checkbox" v-model="autoCreateUnits"> <span> Create Units Automatically </span> <span class="checkmark"></span>
+                                     </label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-3" v-show="autoCreateUnits">
+
+                                <div class="form-group">
+                                    <label> <strong>  No. Of Units Per Property: </strong>  </label>
+                                    <input id="unitNo" v-model="noOfUnitsPerProperty" ref="noOfUnitsPerProperty" placeholder="1" type="text" class="form-control" />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-3">
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="button" v-on:click="resetForm()" class="btn btn-warning"> <i class="bx bx-reset"></i> Reset </button>
+                        </div>
+                        <div class="col-sm-4">
+
+                            <button type="button" v-on:click="savePropertyUnit()" :disabled="isLoading" class="btn btn-primary" style="float: right;">  
+                                
+                                Save
+                                
+                                <div class="spinner-border" v-if="isLoading" role="status" aria-hidden="true" style="width: 20px; height: 20px"></div>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/property-rental/rentals/propety-units.js" asp-append-version="true"></script>

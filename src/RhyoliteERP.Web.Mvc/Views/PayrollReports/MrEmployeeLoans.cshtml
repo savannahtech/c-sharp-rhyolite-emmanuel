@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Reports | Employee Loans";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"> Monthly Reports </a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("MrEmployeeLoans","PayrollReports")"> Employee Loans </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Employee Loans </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+                    <div class="row">
+
+                        <div class="col-sm-2">  </div>
+
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <label> <strong>Start Date:</strong> </label>
+                                <input v-model="startDate" ref="startDate" type="date" class="form-control" />
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <label> <strong> End Date: </strong> </label>
+                                <input v-model="endDate" ref="endDate" type="date" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="alignright btn btn-primary mt-2" v-on:click="getReportData()"> Search </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div style="height:auto;width:auto;min-height:500px;" id="reportView">  </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/payroll/monthly-reports/employee-loans.js" asp-append-version="true"></script>

@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Reports | Salary Advance";
+    Layout = "~/Views/Shared/Layout/_adminPayrollLayout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Monthly Reports</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("MrSalaryAdvance","PayrollReports")"> Salary Advance </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Salary Advance </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:500px;">
+
+
+                    <div style="height:auto;width:auto;min-height:500px;" id="reportView">  </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/payroll/monthly-reports/salary-advance.js" asp-append-version="true"></script>

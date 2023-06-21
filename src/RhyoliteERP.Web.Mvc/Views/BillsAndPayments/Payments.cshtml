@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Bills & Payments | Payments";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Bills &amp; Payments</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("BillsAndPayments","Payments")"> Payments </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Payments </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+
+                    <form id="billpayForm">
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong>  Academic Year: </strong> </label>
+                                    <select class="form-control mb-3" v-model="selectedAcademicYearId">
+                                        <option value="">Select Academic Year</option>
+                                        <option :value="academicYear.id" v-for="academicYear in academicYearList"> {{academicYear.name}} </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label> <strong> Term: </strong>  </label>
+                                    <select class="form-control mb-3" v-model="selectedTermId" v-on:change="getStudentBills()">
+                                        <option value="">Select Term </option>
+                                        <option :value="term.id" v-for="term in termList"> {{term.name}} </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-3">
+
+                                <div class="form-group">
+                                    <label> <strong> Class: </strong>  </label>
+                                    <select class="form-control mb-3" v-model="selectedClassId" v-on:change="getStudents()">
+                                        <option value="">Select Class</option>
+                                        <option :value="schClass.id" v-for="schClass in classList"> {{schClass.className}} </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <strong> Student: </strong>  </label>
+                                    <select class="form-control mb-3" v-model="selectedStudentId">
+                                        <option value="">Select Student</option>
+                                        <option :value="student.id" v-for="student in studentList">{{student.firstName}} {{student.lastName}} ({{student.studentIdentifier}})</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <hr />
+
+
+                        <div class="row">
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label> <strong>Amount Paid: </strong>  </label>
+                                    <input ref="amountPaid" class="form-control" v-model="amountPaid" type="number" />
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label> <strong>  Mode Of Payment: </strong> </label>
+                                    <select class="form-control" v-model="modeOfPayment" ref="modeOfPayment">
+                                        <option>Cash</option>
+                                        <option>Cheque</option>
+                                        <option>Mobile Money</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label> <strong> Date: </strong></label>
+                                    <input type="date" class="form-control" v-model="paymentDate" ref="paymentDate">
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label> <strong> Currency: </strong> </label>
+                                    <select class="form-control mb-3" v-model="selectedCurrencyId">
+                                        <option :value="currency.id" v-for="currency in currencyList"> {{currency.currencyName}} </option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <label> <strong> Cheque No: </strong>  </label>
+                                    <input v-model="chequeNo" ref="chequeNo" type="text" class="form-control" :disabled="!displayChequeInput" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-2">
+
+                                <div class="form-group">
+                                    <br />
+                                    <button type="button" v-on:click="applyFee()" :disabled="isLoading" class="alignright btn btn-primary mt-2" v-if="!isReceiptReady">
+                                        Pay
+                                        <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+
+                                    </button>
+
+                                    <button type="button" v-on:click="printPaymentReceipt()" class="alignright btn btn-info mt-2" v-if="isReceiptReady"> Print Receipt </button>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div id="dataTable"></div>
+
+                    </form>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/school-manager/billspayment/payments.js" asp-append-version="true"></script>

@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "Create Parent";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Parents</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Parents")"> Create Parent </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Create Parent </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+
+                    <fieldset class="form-group">
+                        <legend><span> Search </span></legend>
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <b> <strong> Select Parent: </strong> </b> </label>
+                                    
+                                    <input id="parentIdQuery" v-model="selectedParentId" type="text" class="form-control" />
+                                
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+ 
+                    <fieldset class="form-group">
+                        <legend><span> Create/Update </span></legend>
+
+                        <form id="parForm">
+
+                            <div class="row">
+
+                                <div class="col-sm-2"></div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+                                        <label> <b>1st Guardian's Name: </b> <font color="red">*</font> </label>
+                                        <input type="text" class="form-control" v-model="firstGuardianName" ref="firstGuardianName" placeholder="1st Guardian Name">
+                                        <span class="text-danger" v-if="!$v.firstGuardianName.required && $v.firstGuardianName.$dirty"> 1st Guardian Name field is required </span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label> <b> 1st Guardian's Phone No:</b>  </label>
+                                        <input type="tel" class="form-control" v-model="firstGuardianPhoneNo" ref="firstGuardianPhoneNo" placeholder="1st Guardian's Phone No">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label> <b> 1st Guardian's Email:</b>  </label>
+                                        <input type="email" class="form-control" v-model="firstGuardianEmail" ref="firstGuardianEmail" placeholder="1st Guardian's Email">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label> <b> 1st Guardian's Profession: </b> </label>
+                                        <input type="text" class="form-control" v-model="firstGuardianProfession" ref="firstGuardianProfession" placeholder="1st Guardian's Profession">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label> <b> 1st Guardian Relationship: </b>  <font color="red">*</font> </label>
+                                        <select class="form-control mb-3" v-model="firstGuardianRelationshipId" ref="firstGuardianRelationshipId">
+                                            <option value="00000000-0000-0000-0000-000000000000">Select Relationship</option>
+                                            <option :value="relationship.id" v-for="relationship in relationshipList">{{relationship.name}}</option>
+                                        </select>
+                                        <span class="text-danger" v-if="!$v.firstGuardianRelationshipId.required && $v.firstGuardianRelationshipId.$dirty"> 1st Guardian Relationship field is required </span>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+                                        <label> <b>2nd Guardian's Name: </b>  </label>
+                                        <input type="text" class="form-control" v-model="secondGuardianName" ref="secondGuardianName" placeholder="2nd Guardian's Name">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> <b> 2nd Guardian's Phone No: </b> </label>
+                                        <input type="text" class="form-control" v-model="secondGuardianPhoneNo" ref="secondGuardianPhoneNo" placeholder="2nd Guardian's Phone No">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> <b> 2nd Guardian's Email: </b>  </label>
+                                        <input type="text" class="form-control" v-model="secondGuardianEmail" ref="secondGuardianEmail" placeholder="2nd Guardian's Email">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> <b> 2nd Guardian's Profession: </b>  </label>
+                                        <input type="text" class="form-control" v-model="secondGuardianProfession" ref="secondGuardianProfession" placeholder="2nd Guardian's Profession">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> <b> 2nd Guardian's Relationship: </b>  </label>
+                                        <select class="form-control mb-3" v-model="secondGuardianRelationshipId" ref="secondGuardianRelationshipId">
+                                            <option value="00000000-0000-0000-0000-000000000000">Select Relationship</option>
+                                            <option :value="relationship.id" v-for="relationship in relationshipList">{{relationship.name}}</option>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </fieldset>
+
+                   
+
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-4">
+
+                            <button type="button" :disabled="isLoading" v-on:click="saveParent()" class="btn btn-primary" style="float: right;">
+                                Save
+
+                                <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="~/libs/vuelidate/vuelidate.min.js"></script>
+<script src="~/libs/vuelidate/validators.min.js"></script>
+
+<script src="~/js/school-manager/parents/create.js" asp-append-version="true"></script>

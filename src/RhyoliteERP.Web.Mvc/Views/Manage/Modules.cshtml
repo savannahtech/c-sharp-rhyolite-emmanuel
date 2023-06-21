@@ -1,0 +1,57 @@
+﻿@using RhyoliteERP
+@using Abp.Authorization.Users
+@using Abp.Web.Security.AntiForgery
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@{
+    ViewBag.Title = "Modules";
+    AbpAntiForgeryManager.SetCookie(Context);
+    Layout = "~/Views/Shared/Layout/_adminTenantLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Manage</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Modules","Manage")">Modules </a></li>
+</ul>
+<div class="content-i" id="app">
+    <div class="content-box" style="height: auto; width: auto; min-height: 655px;">
+        <div class="element-wrapper">
+            <h6 class="element-header"> Select a Module </h6>
+            <div class="element-box-tp">
+                <div class="table-responsive">
+                    <table class="table table-padded">
+                        <thead>
+                            <tr>
+                                <th> Module Name </th>
+                                <th>  Description </th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr v-for="subscriptionInfo in subscriptionSummary" v-on:click="selectModule(subscriptionInfo.moduleId)">
+
+                                <td>
+                                    <div class="user-with-avatar"> <span> <strong> {{subscriptionInfo.moduleName}} </strong>  </span> </div>
+                                </td>
+
+                                <td>
+                                    <div class="user-with-avatar"> <span> <strong> {{subscriptionInfo.description}} </strong>  </span> </div>
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<script src="~/js/manage/modules.js" asp-append-version="true"></script>

@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "School Profile";
+    Layout = "~/Views/Shared/Layout/_adminSchLayout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Setups</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("SchoolProfile","SchSetups")"> School Profile </a></li>
+</ul>
+
+<div class="content-i" id="app">
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header"> School Profile </h6>
+            <div class="element-box">
+                <div class="table-responsive" style="height:auto;width:auto;min-height:412px;">
+
+                    <form id="schProfile">
+
+                         <fieldset class="form-group">
+                            <legend><span> Basic Info </span></legend>
+                             
+                            <div class="row">
+
+                            <div class="col-sm-1">
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <b> School Name:</b> </label>
+                                    <input type="text" class="form-control" v-model="schoolName" placeholder="School Name">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>  Academic Year: </label>
+                                    <select class="form-control mb-3" v-model="selectedAcademicYearId">
+                                        <option value="">Select Academic Year</option>
+                                        <option :value="academicYear.id" v-for="academicYear in academicYearList"> {{academicYear.name}} </option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>  Term: </label>
+                                    <select class="form-control mb-3" v-model="selectedTermId">
+                                        <option value="">Select Term </option>
+                                        <option :value="term.id" v-for="term in termList"> {{term.name}} </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Secondary Email Address: </b>  </label>
+                                    <input type="text" class="form-control" id="secondaryEmailAddress" v-model="secondaryEmailAddress" placeholder="Secondary Email Address">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Region or State: </b> </label>
+                                    <input type="text" class="form-control" v-model="regionOrState" placeholder="Region or State">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> City: </b> </label>
+                                    <input type="text" class="form-control" v-model="city" placeholder="City">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> School Head: </b>  </label>
+                                    <input type="text" class="form-control" v-model="schoolHead" placeholder="School Head">
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="col-sm-4">
+
+                                <div class="form-group">
+                                    <label> <b>Website: </b> </label>
+                                    <input type="text" class="form-control" v-model="website" id="website" placeholder="Website">
+
+                                </div>
+                                <div class="form-group">
+                                    <label> <b> Postal Address: </b> </label>
+                                    <input type="text" class="form-control" v-model="postalAddress" placeholder="Postal Address">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> District: </b> </label>
+                                    <input type="text" class="form-control" v-model="district" placeholder="District">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Street Address: </b> </label>
+                                    <input type="text" class="form-control" v-model="streetAddress" placeholder="Street Address">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Accountant:</b> </label>
+                                    <input type="text" class="form-control" v-model="accountant" placeholder="Accountant">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Primary Phone No#:</b> </label>
+                                    <input type="tel" class="form-control" v-model="primaryPhoneNo" placeholder="Primary PhoneNo">
+                                </div>
+
+                                <div class="form-group">
+                                    <label> <b> Assistant School Head: </b> </label>
+                                    <input type="text" class="form-control" v-model="assistantSchoolHead" placeholder="Assistant SchoolHead">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        </fieldset>
+ 
+
+                        <fieldset class="form-group">
+                            <legend><span> Default Values </span></legend>
+
+                            <div class="row">
+
+                                <div class="col-sm-1">
+                                </div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+                                        <label> <b>Auto Email Receipt Notification: </b></label>
+
+                                        <select class="form-control mb-3" id="autoEmailReceiptNotification" v-model="autoEmailReceiptNotification">
+                                            <option value="false">No</option>
+                                            <option value="true">Yes</option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+                                        <label> <b> Auto SMS Receipt Notification:</b></label>
+
+                                        <select class="form-control mb-3" id="autoSMSReceiptNotification" v-model="autoSMSReceiptNotification">
+                                            <option value="false">No</option>
+                                            <option value="true">Yes</option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </fieldset>
+
+
+                        <fieldset class="form-group">
+                            <legend><span>  Email Settings </span></legend>
+                            <div class="row">
+
+                                <div class="col-sm-1">
+                                </div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+                                        <label> <b>Mail Host Name: </b> </label>
+                                        <input type="text" class="form-control" v-model="mailHostName" placeholder="Mail Host Name">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> <b>Primary Email Address: </b> </label>
+                                        <input type="text" class="form-control" v-model="primaryEmailAddress" placeholder="Primary Email Address">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> <b>Mail Password: </b> </label>
+                                        <input type="password" class="form-control" v-model="emailPassword" placeholder="********">
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+                                        <label> <b> Port Number: </b> </label>
+                                        <input type="number" class="form-control" v-model="portNumber" placeholder="1234">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> <b> Is SSL Enabled: </b> </label>
+                                        <select class="form-control mb-3" v-model="isSSLEnabled">
+                                            <option value="false">No</option>
+                                            <option value="true">Yes</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+ 
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-4">
+
+                                <button type="button" v-on:click="saveProfile()" style="float: right" class="btn btn-primary">
+                                    Save
+                                    <i class="fa fa-spinner fa-spin" v-if="isLoading"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/js/school-manager/setups/school-profile.js" asp-append-version="true"></script>
